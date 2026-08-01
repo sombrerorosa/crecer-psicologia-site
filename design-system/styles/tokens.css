@@ -1,0 +1,147 @@
+/* ============================================================
+   CRECER PSICOLOGÍA — Design Tokens
+   Paleta, tipografía, espaciado y las 3 direcciones visuales.
+   ============================================================ */
+
+:root {
+  /* ---- Marca: color base (no cambia entre direcciones) ---- */
+  --c-forest:      #3B5C45; /* Verde bosque — primario */
+  --c-green:       #4E7A5E; /* Verde medio — secundario / hover */
+  --c-green-soft:  #C2D9C9; /* Verde suave — superficies, separadores */
+  --c-cream:       #F2EAD8; /* Crema cálido — fondo base */
+  --c-sand:        #C4A882; /* Arena cálido — detalle, acento */
+  --c-ink:         #3D3530; /* Marrón oscuro — títulos / cuerpo */
+  --c-ink-soft:    #6B5E55; /* Marrón medio — secundario */
+  --c-muted:       #B5A99E; /* Beige claro — terciario / deshabilitado */
+  --c-white:       #FAF6EE; /* Blanco cálido — superficie clara */
+
+  /* Estados semánticos (derivados, dentro del mundo cálido) */
+  --c-success:     #4E7A5E;
+  --c-success-bg:  #E4EFE7;
+  --c-error:       #A6513E;
+  --c-error-bg:    #F3E2DB;
+  --c-info:        #6E7E8C;
+  --c-info-bg:     #E6EAEC;
+
+  /* Líneas y velos */
+  --line:          rgba(61, 53, 48, 0.12);
+  --line-strong:   rgba(61, 53, 48, 0.22);
+  --veil:          rgba(61, 53, 48, 0.04);
+
+  /* ---- Tipografía ---- */
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-sans:    'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono:    'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* ---- Escala de espaciado (4pt) ---- */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+
+  /* ---- Transiciones ---- */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --t-fast: 0.16s var(--ease);
+  --t: 0.28s var(--ease);
+
+  /* Defaults sobreescritos por cada dirección ------------- */
+  --scale: 1;
+  --bg:        var(--c-white);
+  --surface:   #FFFFFF;
+  --surface-2: var(--c-cream);
+  --radius-sm: 6px;
+  --radius:    10px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+  --shadow-sm: 0 1px 2px rgba(61,53,48,0.06);
+  --shadow:    0 6px 22px rgba(61,53,48,0.08);
+  --shadow-lg: 0 18px 50px rgba(61,53,48,0.12);
+  --heading-weight: 600;
+  --heading-tracking: -0.01em;
+  --body-size: 16px;
+  --section-pad: var(--sp-8);
+  --deco: 1; /* opacidad de elementos decorativos */
+}
+
+/* =================================================================
+   DIRECCIÓN 1 · EDITORIAL
+   Revista impresa: serif protagónico, alto contraste de escala,
+   hairlines, itálicas, bordes sobrios, sombras casi planas.
+   ================================================================= */
+[data-dir="editorial"] {
+  --scale: 1.12;
+  --bg:        var(--c-white);
+  --surface:   #FFFFFF;
+  --surface-2: #F6EFE0;
+  --radius-sm: 3px;
+  --radius:    4px;
+  --radius-lg: 6px;
+  --radius-pill: 999px;
+  --shadow-sm: none;
+  --shadow:    0 1px 0 var(--line);
+  --shadow-lg: 0 2px 0 var(--line);
+  --heading-weight: 600;
+  --heading-tracking: -0.02em;
+  --body-size: 17px;
+  --section-pad: var(--sp-9);
+  --deco: 1;
+}
+
+/* =================================================================
+   DIRECCIÓN 2 · MINIMAL
+   Restringido y aireado: sans protagónica, serif discreta,
+   muchísimo blanco, solo hairlines, sin sombras, acentos puntuales.
+   ================================================================= */
+[data-dir="minimal"] {
+  --scale: 0.94;
+  --bg:        #FBF8F2;
+  --surface:   #FFFFFF;
+  --surface-2: #FBF8F2;
+  --radius-sm: 5px;
+  --radius:    7px;
+  --radius-lg: 10px;
+  --radius-pill: 999px;
+  --shadow-sm: none;
+  --shadow:    none;
+  --shadow-lg: none;
+  --heading-weight: 500;
+  --heading-tracking: -0.015em;
+  --body-size: 15px;
+  --section-pad: var(--sp-8);
+  --deco: 0.55;
+}
+
+/* =================================================================
+   DIRECCIÓN 3 · CÁLIDA
+   Acogedor: crema dominante, formas redondeadas, sombras difusas,
+   arena presente, cuerpo más grande, sensación cercana.
+   ================================================================= */
+[data-dir="calida"] {
+  --scale: 1.04;
+  --bg:        var(--c-cream);
+  --surface:   var(--c-white);
+  --surface-2: #EFE5D0;
+  --radius-sm: 12px;
+  --radius:    18px;
+  --radius-lg: 26px;
+  --radius-pill: 999px;
+  --shadow-sm: 0 2px 6px rgba(61,53,48,0.06);
+  --shadow:    0 10px 30px rgba(61,53,48,0.10);
+  --shadow-lg: 0 24px 60px rgba(61,53,48,0.16);
+  --heading-weight: 600;
+  --heading-tracking: -0.005em;
+  --body-size: 17px;
+  --section-pad: var(--sp-8);
+  --deco: 1;
+}
+
+/* ---- Escala tipográfica derivada (responde a --scale) ---- */
+:root {
+  --t-display: calc(3.5rem  * var(--scale));
+  --t-h1:      calc(2.5rem  * var(--scale));
+  --t-h2:      calc(1.75rem * var(--scale));
+  --t-h3:      calc(1.3rem  * var(--scale));
+  --t-h4:      calc(1.05rem * var(--scale));
+  --t-lead:    calc(1.25rem * var(--scale));
+  --t-body:    var(--body-size);
+  --t-small:   13px;
+  --t-caption: 11px;
+}
