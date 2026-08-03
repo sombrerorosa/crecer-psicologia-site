@@ -15,15 +15,22 @@ Por pedido explícito: **no hay sección "Nuestro Equipo"** — el sitio actual 
 
 ## Formulario de contacto (HubSpot)
 
-Portal `21499646`. Envío directo por fetch a la Forms API (mismo patrón que sombrero-rosa-site), sin depender de un iframe embebido de HubSpot:
+Portal `21499646`, cuenta propia de Crecer (**distinta** de la de sombrero-rosa-site). Envío directo por fetch a la Forms API pública (no requiere API key / Private App token — a diferencia del enfoque de upsert a CRM que usa `sombrero-rosa-site/functions/api/submit.js`):
 - Home y Psicología Online → form Argentina (`568a344c-97b3-4c3e-aef8-031cd330363a`)
 - Psicología Online Internacional → form Exterior (`369f0579-f050-44d1-b339-0e9bcfdee7a0`)
 
+## Sanity
+
+Proyecto creado: **`98goghrf`**, dataset `production`. Ya está cableado en `site/sanity.config.ts`, `site/sanity.cli.ts` y `site/sanity/sanity.config.ts`, y en `site/.env.example`. Los fetchers (`src/lib/sanity.ts`) atrapan cualquier error de red/config y caen a los defaults hardcodeados de cada página — nunca rompen el build.
+
+Falta:
+- Correr el Studio (`npx sanity dev` dentro de `site/`, o deployarlo a Cloudflare Pages) y crear los documentos singleton (`siteSettings`, `homePage`, `onlinePage`, `internationalPage`) — los `initialValue` de cada campo ya traen precargado el contenido real migrado, así que es solo abrir cada uno y publicarlo.
+- Agregar `SANITY_PROJECT_ID=98goghrf` y `SANITY_DATASET=production` como variables de entorno en Cloudflare Pages.
+- Agregar el dominio del Studio a los CORS Origins del proyecto (sanity.io/manage → API) una vez deployado.
+
 ## Pendientes antes de producción
 
-1. **Sanity**: crear el proyecto en sanity.io/manage y reemplazar `xxxxxxxxx` por el Project ID real en `site/sanity.config.ts`, `site/sanity.cli.ts` y `site/sanity/sanity.config.ts`, más `SANITY_PROJECT_ID` en las variables de entorno de Cloudflare Pages. Sin esto el sitio funciona igual — cada página usa los valores por defecto hardcodeados que ves ahora — pero el contenido no es editable desde un Studio todavía.
-2. **WhatsApp**: el número usado (`+54 9 11 0000-0000` / `wa.me/5491100000000`) es un placeholder. Reemplazar en Sanity (`siteSettings.whatsapp`) una vez creado el proyecto, o directamente en `site/src/components/FloatingActions.astro` y `site/src/pages/gracias.astro` mientras tanto.
-3. **Fotos reales**: todos los espacios de imagen (hero, cards de "a quiénes atendemos", enfoque) son placeholders rayados, a propósito — reemplazar cuando haya material fotográfico del consultorio.
-4. **Respuestas de FAQ**: 3 de las 4 preguntas frecuentes tienen texto simulado ("Contenido a confirmar…") a pedido — completarlas en `sanity/schemas/sharedFields.ts` (`faqField`) o desde el Studio una vez conectado.
-5. **Cloudflare Pages**: configurar 2 proyectos (sitio y Studio) igual que en `sombrero-rosa-site/SETUP.md` — build command `cd site && npm install && npm run build`, output `site/dist`; Studio con `npx sanity build studio-dist`.
-6. **Dominio**: migrar `crecerpsicologia.com.ar` de WordPress a Cloudflare Pages cuando el sitio esté aprobado (ver sección 8 de `sombrero-rosa-site/SETUP.md` para el procedimiento sin downtime).
+1. **Fotos reales**: todos los espacios de imagen (hero, cards de "a quiénes atendemos", enfoque) son placeholders rayados, a propósito — reemplazar cuando haya material fotográfico del consultorio.
+2. **Respuestas de FAQ**: 3 de las 4 preguntas frecuentes tienen texto simulado ("Contenido a confirmar…") a pedido — completarlas en `sanity/schemas/sharedFields.ts` (`faqField`) o desde el Studio una vez conectado.
+3. **Cloudflare Pages**: configurar 2 proyectos (sitio y Studio) igual que en `sombrero-rosa-site/SETUP.md` — build command `cd site && npm install && npm run build`, output `site/dist`; Studio con `npx sanity build studio-dist`.
+4. **Dominio**: migrar `crecerpsicologia.com.ar` de WordPress a Cloudflare Pages cuando el sitio esté aprobado (ver sección 8 de `sombrero-rosa-site/SETUP.md` para el procedimiento sin downtime).

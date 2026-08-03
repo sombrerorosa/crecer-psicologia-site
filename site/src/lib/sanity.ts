@@ -1,5 +1,5 @@
 import { createClient } from '@sanity/client';
-import imageUrlBuilder from '@sanity/image-url';
+import { createImageUrlBuilder } from '@sanity/image-url';
 
 const projectId = import.meta.env.SANITY_PROJECT_ID;
 
@@ -16,25 +16,39 @@ export const client = projectId
     })
   : null;
 
-const builder = client ? imageUrlBuilder(client) : null;
+const builder = client ? createImageUrlBuilder(client) : null;
 export const urlFor = (source: any) => builder?.image(source);
 
-/* ---- typed fetchers ------------------------------------------ */
+/* ---- typed fetchers -------------------------------------------
+   Cualquier falla de red o de configuración de Sanity se traga acá:
+   una consulta que no resuelve no debe tirar abajo el build estático
+   ni la carga de la página — simplemente cae a los defaults de cada
+   página, igual que cuando no hay proyecto conectado. ------------- */
+
+async function safeFetch<T>(query: string): Promise<T | null> {
+  if (!client) return null;
+  try {
+    return await client.fetch<T>(query);
+  } catch (err) {
+    console.warn('[sanity] fetch failed, using page defaults:', (err as Error).message);
+    return null;
+  }
+}
 
 const PAGE_PROJECTION = `hero, audiences, specialties, approach, contactForm, howItWorks, faq`;
 
-export async function getSiteSettings() {
-  return client?.fetch(`*[_type == "siteSettings"][0]`) ?? null;
+export function getSiteSettings() {
+  return safeFetch(`*[_type == "siteSettings"][0]`);
 }
 
-export async function getHomePage() {
-  return client?.fetch(`*[_type == "homePage"][0]{ ${PAGE_PROJECTION} }`) ?? null;
+export function getHomePage() {
+  return safeFetch(`*[_type == "homePage"][0]{ ${PAGE_PROJECTION} }`);
 }
 
-export async function getOnlinePage() {
-  return client?.fetch(`*[_type == "onlinePage"][0]{ ${PAGE_PROJECTION} }`) ?? null;
+export function getOnlinePage() {
+  return safeFetch(`*[_type == "onlinePage"][0]{ ${PAGE_PROJECTION} }`);
 }
 
-export async function getInternationalPage() {
-  return client?.fetch(`*[_type == "internationalPage"][0]{ ${PAGE_PROJECTION} }`) ?? null;
+export function getInternationalPage() {
+  return safeFetch(`*[_type == "internationalPage"][0]{ ${PAGE_PROJECTION} }`);
 }

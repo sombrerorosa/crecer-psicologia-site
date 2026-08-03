@@ -5,7 +5,7 @@ import { schemaTypes } from './sanity/schemas';
 export default defineConfig({
   name: 'crecer-psicologia',
   title: 'Crecer Psicología',
-  projectId: 'xxxxxxxxx', // TODO: reemplazar por el Project ID real (sanity.io/manage)
+  projectId: '98goghrf',
   dataset: 'production',
   plugins: [
     structureTool({
