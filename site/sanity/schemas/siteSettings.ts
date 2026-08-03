@@ -6,7 +6,7 @@ export default {
   fields: [
     { name: 'siteTitle',   title: 'Nombre del sitio',       type: 'string', initialValue: 'Crecer Psicología' },
     { name: 'description', title: 'Descripción SEO',        type: 'text', rows: 2 },
-    { name: 'whatsapp',    title: 'Link de WhatsApp',       type: 'url' },
+    { name: 'whatsapp',    title: 'Link de WhatsApp',       type: 'url', initialValue: 'https://wa.me/5491132950452' },
     { name: 'address',     title: 'Dirección / ciudad',     type: 'string', initialValue: 'Canning, Buenos Aires' },
     { name: 'instagram',   title: 'Link de Instagram',      type: 'url' },
   ],
