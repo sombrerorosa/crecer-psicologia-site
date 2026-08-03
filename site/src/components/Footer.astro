@@ -1,0 +1,17 @@
+---
+const NAV = [
+  { href: '/', label: 'Inicio' },
+  { href: '#especialidades', label: 'Especialidades' },
+  { href: '#enfoque', label: 'Nuestro Enfoque' },
+  { href: '#contacto', label: 'Contacto' },
+];
+---
+<footer class="site-footer">
+  <div class="ft-inner">
+    <div class="nm">Crecer Psicología</div>
+    <nav class="ft-nav" aria-label="Footer">
+      {NAV.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+  </div>
+  <div class="ft-bottom">© {new Date().getFullYear()} Crecer Psicología. Todos los derechos reservados.</div>
+</footer>

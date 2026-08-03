@@ -1,0 +1,44 @@
+---
+/* Los anclajes son relativos a la página actual: cada landing
+   (home, /psicologia-online, /psicologia-online-internacional)
+   repite las mismas secciones, así que el link funciona en todas. */
+const NAV = [
+  { href: '/', label: 'Inicio' },
+  { href: '#especialidades', label: 'Especialidades' },
+  { href: '#enfoque', label: 'Nuestro Enfoque' },
+  { href: '#contacto', label: 'Contacto' },
+];
+---
+<header class="site-header">
+  <a class="brand" href="/" aria-label="Crecer Psicología, inicio">
+    <img src="/assets/logo-crecer.png" alt="" />
+    <span class="nm">Crecer Psicología</span>
+  </a>
+  <nav class="site-nav" id="main-nav" aria-label="Principal">
+    {NAV.map((item) => <a href={item.href}>{item.label}</a>)}
+  </nav>
+  <button class="hamburger" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<style>
+  .site-nav.open {
+    display: flex; flex-direction: column;
+    position: fixed; inset: 76px 0 0 0;
+    background: var(--bg); padding: var(--sp-5); gap: var(--sp-2);
+    z-index: 200; border-top: 1px solid var(--line);
+  }
+</style>
+
+<script>
+  const btn = document.getElementById('menu-toggle');
+  const nav = document.getElementById('main-nav');
+  btn?.addEventListener('click', () => {
+    const open = nav?.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(!!open));
+  });
+  nav?.querySelectorAll('a').forEach((a) =>
+    a.addEventListener('click', () => nav.classList.remove('open'))
+  );
+</script>

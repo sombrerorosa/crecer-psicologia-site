@@ -1,0 +1,102 @@
+---
+import Icon from './Icon.astro';
+import Accordion from './Accordion.astro';
+import ContactForm from './ContactForm.astro';
+
+interface Props {
+  audiences: { title: string; lead: string; items: { title: string }[] };
+  specialties: { title: string; items: { icon: string; title: string; desc: string }[] };
+  approach: { eyebrow: string; title: string; paragraphs: string[]; quote: string; quoteAuthor: string };
+  contactForm: { title: string; lead: string; hubspotFormId: string; showCountryField?: boolean };
+  howItWorks: { title: string; items: { icon: string; title: string; desc: string }[] };
+  faq: { title: string; items: { question: string; answer: string }[] };
+  phonePlaceholder?: string;
+}
+const { audiences, specialties, approach, contactForm, howItWorks, faq, phonePlaceholder } = Astro.props;
+---
+<section class="section" id="atendemos">
+  <div class="section-inner">
+    <div class="section-head">
+      <h2 class="section-title">{audiences.title}</h2>
+      <p class="section-lead">{audiences.lead}</p>
+    </div>
+    <div class="grid" style={`grid-template-columns:repeat(${audiences.items.length},1fr);`}>
+      {audiences.items.map((item) => (
+        <div class="card audience-card hover">
+          <div class="card-media ph"><span>foto · {item.title.toLowerCase()}</span></div>
+          <div class="card-body">
+            <h4>{item.title}</h4>
+            <a href="#contacto">Contactanos</a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="section" id="especialidades" style="background:var(--surface-2);">
+  <div class="section-inner">
+    <div class="section-head">
+      <h2 class="section-title">{specialties.title}</h2>
+    </div>
+    <div class="grid grid-3">
+      {specialties.items.map((item) => (
+        <div class="card card-spec">
+          <div class="card-body">
+            <div class="card-icon"><Icon name={item.icon as any} /></div>
+            <h4>{item.title}</h4>
+            <p>{item.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="section" id="enfoque">
+  <div class="section-inner grid grid-2" style="align-items:center;gap:var(--sp-8);">
+    <div>
+      <div class="eyebrow" style="justify-content:flex-start;">{approach.eyebrow}</div>
+      <h2 class="section-title">{approach.title}</h2>
+      {approach.paragraphs.map((p) => <p style="color:var(--c-ink-soft);margin-bottom:var(--sp-3);">{p}</p>)}
+    </div>
+    <div class="ph" style="aspect-ratio:4/5;border-radius:var(--radius-lg);"><span>foto · espacio cálido</span></div>
+  </div>
+</section>
+
+<div class="section" style="background:var(--c-forest);padding-top:var(--sp-6);padding-bottom:var(--sp-6);">
+  <div class="section-inner">
+    <div class="pullquote" style="border-left-color:var(--c-sand);text-align:center;border-left:none;">
+      <p style="color:var(--c-white);">"{approach.quote}"</p>
+      <cite style="color:var(--c-green-soft);">{approach.quoteAuthor}</cite>
+    </div>
+  </div>
+</div>
+
+<ContactForm title={contactForm.title} lead={contactForm.lead} hubspotFormId={contactForm.hubspotFormId} showCountryField={contactForm.showCountryField} phonePlaceholder={phonePlaceholder} />
+
+<section class="section">
+  <div class="section-inner">
+    <div class="section-head">
+      <h2 class="section-title">{howItWorks.title}</h2>
+    </div>
+    <div class="grid grid-3">
+      {howItWorks.items.map((item) => (
+        <div class="step">
+          <div class="step-icon"><Icon name={item.icon as any} /></div>
+          <h4>{item.title}</h4>
+          <p>{item.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--surface-2);">
+  <div class="section-inner" style="max-width:760px;">
+    <div class="section-head" style="margin-bottom:var(--sp-5);">
+      <h2 class="section-title">{faq.title}</h2>
+    </div>
+    <Accordion items={faq.items} />
+  </div>
+</section>

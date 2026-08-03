@@ -1,0 +1,116 @@
+---
+interface Props {
+  title: string;
+  lead: string;
+  hubspotFormId: string;
+  showCountryField?: boolean;
+  phonePlaceholder?: string;
+}
+const {
+  title,
+  lead,
+  hubspotFormId,
+  showCountryField = false,
+  phonePlaceholder = '+54 9 11 1234 5678',
+} = Astro.props;
+const HUBSPOT_PORTAL_ID = '21499646';
+const formId = `contact-form-${hubspotFormId.slice(0, 8)}`;
+---
+<section class="section contact-band" id="contacto">
+  <div class="section-inner">
+    <div class="section-head">
+      <h2 class="section-title">{title}</h2>
+      <p class="section-lead">{lead}</p>
+    </div>
+    <form class="contact-form-grid" id={formId} data-hubspot-form-id={hubspotFormId} data-hubspot-portal-id={HUBSPOT_PORTAL_ID} novalidate>
+      <div class="contact-form-row">
+        <div class="field">
+          <label>Nombre <span class="req">*</span></label>
+          <input class="input" name="name" type="text" placeholder="Ej: María" required />
+        </div>
+        <div class="field">
+          <label>Apellido</label>
+          <input class="input" name="apellidos" type="text" placeholder="Ej: Fernández" />
+        </div>
+      </div>
+      <div class="contact-form-row">
+        <div class="field">
+          <label>Email <span class="req">*</span></label>
+          <input class="input" name="email" type="email" placeholder="vos@email.com" required />
+        </div>
+        {showCountryField ? (
+          <div class="field">
+            <label>País / región <span class="req">*</span></label>
+            <input class="input" name="country" type="text" placeholder="Ej: España" required />
+          </div>
+        ) : (
+          <div class="field">
+            <label>Teléfono</label>
+            <input class="input" name="phone" type="tel" placeholder={phonePlaceholder} />
+          </div>
+        )}
+      </div>
+      {showCountryField && (
+        <div class="field">
+          <label>Teléfono</label>
+          <input class="input" name="phone" type="tel" placeholder={phonePlaceholder} />
+        </div>
+      )}
+      <div class="field">
+        <label>Mensaje</label>
+        <textarea class="textarea" name="msg" placeholder="¿Cuál es el motivo de tu consulta?"></textarea>
+      </div>
+      <button class="btn btn-sand lg" type="submit" style="width:100%;">Enviar</button>
+    </form>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('form[data-hubspot-form-id]').forEach((form) => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const el = form as HTMLFormElement;
+      const portalId = el.dataset.hubspotPortalId;
+      const formGuid = el.dataset.hubspotFormId;
+      const btn = el.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+      const get = (name: string) => (el.elements.namedItem(name) as HTMLInputElement | null)?.value ?? '';
+      const fields = [
+        { name: 'firstname', value: get('name') },
+        { name: 'lastname',  value: get('apellidos') },
+        { name: 'email',     value: get('email') },
+        { name: 'phone',     value: get('phone') },
+        { name: 'country',   value: get('country') },
+        { name: 'message',   value: get('msg') },
+      ].filter((f) => f.value !== '');
+
+      btn.classList.add('is-loading');
+      btn.disabled = true;
+
+      try {
+        const res = await fetch(
+          `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formGuid}`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              fields,
+              context: { pageUri: window.location.href, pageName: document.title },
+            }),
+          }
+        );
+        if (!res.ok) throw new Error('server error');
+        el.innerHTML = `
+          <div style="text-align:center;padding:var(--sp-6) 0;">
+            <div style="width:52px;height:52px;border-radius:50%;background:var(--c-sand);color:var(--c-ink);display:grid;place-items:center;margin:0 auto var(--sp-4);font-size:22px;">✓</div>
+            <h3 style="color:var(--c-white);">¡Gracias por escribirnos!</h3>
+            <p style="color:var(--c-green-soft);margin-top:8px;">Te contactaremos a la brevedad.</p>
+          </div>`;
+      } catch {
+        btn.classList.remove('is-loading');
+        btn.disabled = false;
+        alert('Hubo un error al enviar. Por favor intentá de nuevo o escribinos por WhatsApp.');
+      }
+    });
+  });
+</script>

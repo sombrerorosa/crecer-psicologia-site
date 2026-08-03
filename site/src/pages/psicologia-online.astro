@@ -1,0 +1,92 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import LandingSections from '../components/LandingSections.astro';
+import { getOnlinePage } from '../lib/sanity';
+
+const page = await getOnlinePage();
+
+const _hero = page?.hero;
+const hero = {
+  headline: _hero?.headline || 'Psicología Online',
+  lead:     _hero?.lead     || 'Tu momento, en cualquier lugar',
+  ctaText:  _hero?.ctaText  || 'Contactanos',
+};
+
+const audiences = page?.audiences?.items?.length ? page.audiences : {
+  title: 'A quiénes atendemos',
+  lead: 'Nos enfocamos en la atención de personas adultas y parejas',
+  items: [{ title: 'Jóvenes adultos' }, { title: 'Adultos' }, { title: 'Adultos mayores' }, { title: 'Parejas' }],
+};
+
+const specialties = page?.specialties?.items?.length ? page.specialties : {
+  title: 'Especialidades',
+  items: [
+    { icon: 'compass', title: 'Ansiedad y estrés', desc: 'Acompañamos procesos relacionados con preocupación excesiva, tensión emocional, ataques de pánico y dificultades para gestionar las demandas del día a día.' },
+    { icon: 'heart', title: 'Vínculos y relaciones', desc: 'Exploramos los patrones relacionales que se repiten en parejas, familia y entorno social, favoreciendo vínculos más sanos y satisfactorios.' },
+    { icon: 'star', title: 'Autoestima y desarrollo personal', desc: 'Trabajamos sobre la relación que cada persona tiene consigo misma, promoviendo el autoconocimiento y el crecimiento en las distintas áreas de la vida.' },
+  ],
+};
+
+const approach = page?.approach?.paragraphs?.length ? page.approach : {
+  eyebrow: 'Cómo trabajamos',
+  title: 'Nuestro enfoque',
+  paragraphs: [
+    'Nos dedicamos a co-crear un espacio cálido, de apoyo y respeto que favorezca el cambio para alcanzar tus objetivos.',
+    'Durante la terapia te facilitamos herramientas que te ayuden a crecer y aprender nuevas formas de pensar, sentir y actuar para que puedas desarrollarte en diversos ámbitos.',
+    'Trabajamos con variadas técnicas psicoterapéuticas que nos permiten adaptar el proceso de trabajo a la situación de cada paciente.',
+  ],
+  quote: 'Hasta que lo inconsciente no se haga consciente, seguirá dirigiendo tu vida y tú lo llamarás destino.',
+  quoteAuthor: 'Carl Jung',
+};
+
+const contactForm = page?.contactForm?.hubspotFormId ? page.contactForm : {
+  title: 'Coordiná tu primer consulta',
+  lead: 'Dejanos tus datos y nos contactaremos con vos para coordinar una consulta.',
+  hubspotFormId: '568a344c-97b3-4c3e-aef8-031cd330363a',
+  showCountryField: false,
+};
+
+const howItWorks = page?.howItWorks?.items?.length ? page.howItWorks : {
+  title: '¿Cómo funciona?',
+  items: [
+    { icon: 'calendar', title: 'Coordiná tu turno', desc: 'Dejanos tus datos para coordinar un horario para tu primer consulta.' },
+    { icon: 'video', title: 'Sesiones por videollamada', desc: 'Las sesiones se realizan a través de videollamadas. Fijaremos un día y horario semanal.' },
+    { icon: 'clock', title: 'Duración', desc: 'Tendrás una sesión una vez por semana con una duración de 50 minutos.' },
+  ],
+};
+
+const faq = page?.faq?.items?.length ? page.faq : {
+  title: 'Preguntas frecuentes',
+  items: [
+    { question: '¿Cualquiera puede hacer terapia online?', answer: 'La terapia online es un canal eficaz para la comunicación terapéutica. Como el canal es audiovisual se asemeja muchísimo a las terapias presenciales. La mayoría de los casos pueden ser tratados mediante esta modalidad.' },
+    { question: '¿Qué necesito para poder hacer terapia online?', answer: 'Contenido a confirmar — completá esta respuesta desde el Studio.' },
+    { question: '¿Cuánto tiempo dura la sesión?', answer: 'Contenido a confirmar — completá esta respuesta desde el Studio.' },
+    { question: '¿Cómo se realiza el pago?', answer: 'Contenido a confirmar — completá esta respuesta desde el Studio.' },
+  ],
+};
+---
+<Base title="Psicología Online — Crecer Psicología" description="Psicología online para adultos y parejas. Tu momento, en cualquier lugar.">
+  <Header />
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-bg ph"><span>foto · sesión online</span></div>
+      <div class="hero-inner">
+        <h1>{hero.headline}</h1>
+        <p>{hero.lead}</p>
+        <a href="#contacto" class="btn btn-primary lg">{hero.ctaText}</a>
+      </div>
+    </section>
+
+    <LandingSections
+      audiences={audiences}
+      specialties={specialties}
+      approach={approach}
+      contactForm={contactForm}
+      howItWorks={howItWorks}
+      faq={faq}
+    />
+  </main>
+  <Footer />
+</Base>

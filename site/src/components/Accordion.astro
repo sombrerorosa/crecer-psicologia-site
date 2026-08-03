@@ -1,0 +1,44 @@
+---
+import Icon from './Icon.astro';
+interface Item { question: string; answer: string }
+interface Props { items: Item[] }
+const { items } = Astro.props;
+---
+<div class="accordion" data-accordion>
+  {items.map((item, i) => (
+    <div class:list={["acc-item", { open: i === 0 }]}>
+      <button class="acc-head" type="button">
+        {item.question}
+        <span class="acc-icon"><Icon name="chevron" /></span>
+      </button>
+      <div class="acc-panel" style={i === 0 ? 'max-height:400px;' : undefined}>
+        <div class="acc-panel-inner">{item.answer}</div>
+      </div>
+    </div>
+  ))}
+</div>
+
+<script>
+  document.querySelectorAll('[data-accordion]').forEach((acc) => {
+    acc.querySelectorAll('.acc-head').forEach((head) => {
+      head.addEventListener('click', () => {
+        const item = head.closest('.acc-item');
+        const panel = item?.querySelector('.acc-panel') as HTMLElement | null;
+        const open = item?.classList.contains('open');
+        acc.querySelectorAll('.acc-item.open').forEach((o) => {
+          if (o !== item) {
+            o.classList.remove('open');
+            (o.querySelector('.acc-panel') as HTMLElement).style.maxHeight = '';
+          }
+        });
+        if (open) {
+          item?.classList.remove('open');
+          if (panel) panel.style.maxHeight = '';
+        } else {
+          item?.classList.add('open');
+          if (panel) panel.style.maxHeight = panel.scrollHeight + 'px';
+        }
+      });
+    });
+  });
+</script>
