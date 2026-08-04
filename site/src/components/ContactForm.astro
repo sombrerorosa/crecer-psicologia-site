@@ -99,14 +99,18 @@ const formId = `contact-form-${hubspotFormId.slice(0, 8)}`;
             }),
           }
         );
-        if (!res.ok) throw new Error('server error');
-        el.innerHTML = `
-          <div style="text-align:center;padding:var(--sp-6) 0;">
-            <div style="width:52px;height:52px;border-radius:50%;background:var(--c-sand);color:var(--c-ink);display:grid;place-items:center;margin:0 auto var(--sp-4);font-size:22px;">✓</div>
-            <h3 style="color:var(--c-white);">¡Gracias por escribirnos!</h3>
-            <p style="color:var(--c-green-soft);margin-top:8px;">Te contactaremos a la brevedad.</p>
-          </div>`;
-      } catch {
+        if (!res.ok) {
+          // HubSpot devuelve el motivo exacto (campo faltante, form GUID
+          // inválido, consentimiento GDPR requerido, etc.) en el body —
+          // lo dejamos en consola para poder diagnosticar de verdad.
+          const body = await res.text();
+          console.error('[hubspot] submit failed', res.status, body);
+          throw new Error(body || `HTTP ${res.status}`);
+        }
+        // Redirect en vez de reemplazar el form in-place: así se dispara
+        // la conversión de medios (Meta/Google Ads) atada a /gracias.
+        window.location.href = '/gracias';
+      } catch (err) {
         btn.classList.remove('is-loading');
         btn.disabled = false;
         alert('Hubo un error al enviar. Por favor intentá de nuevo o escribinos por WhatsApp.');
