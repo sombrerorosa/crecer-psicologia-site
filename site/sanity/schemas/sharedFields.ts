@@ -124,9 +124,9 @@ export const faqField = {
       }],
       initialValue: [
         { question: '¿Cualquiera puede hacer terapia online?', answer: 'La terapia online es un canal eficaz para la comunicación terapéutica. Como el canal es audiovisual se asemeja muchísimo a las terapias presenciales. La mayoría de los casos pueden ser tratados mediante esta modalidad.' },
-        { question: '¿Qué necesito para poder hacer terapia online?', answer: 'Contenido a confirmar — completá esta respuesta desde el Studio.' },
-        { question: '¿Cuánto tiempo dura la sesión?', answer: 'Contenido a confirmar — completá esta respuesta desde el Studio.' },
-        { question: '¿Cómo se realiza el pago?', answer: 'Contenido a confirmar — completá esta respuesta desde el Studio.' },
+        { question: '¿Qué necesito para poder hacer terapia online?', answer: 'Las sesiones se realizan a través de videollamadas. Para poder tener tu sesión solo tenés que tener un espacio de privacidad, buena conexión a Internet y alguna aplicación de videollamadas (Meet, WhatsApp). Cuando coordines la consulta podrás acordar la aplicación a utilizar.' },
+        { question: '¿Cuánto tiempo dura la sesión?', answer: 'Las sesiones tienen una duración de 50 minutos.' },
+        { question: '¿Cómo se realiza el pago?', answer: 'El pago puede hacerse a través de transferencia bancaria o Mercado Pago. El mismo deberá realizarse previo a cada sesión.' },
       ],
     },
   ],

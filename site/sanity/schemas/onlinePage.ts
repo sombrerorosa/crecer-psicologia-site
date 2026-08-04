@@ -19,7 +19,7 @@ export default {
         { name: 'photo',    title: 'Foto de fondo', type: 'image' },
       ],
     },
-    audiencesField([{ title: 'Jóvenes adultos' }, { title: 'Adultos' }, { title: 'Adultos mayores' }, { title: 'Parejas' }]),
+    audiencesField([{ title: 'Jóvenes adultos' }, { title: 'Adultos' }, { title: 'Parejas' }]),
     specialtiesField,
     approachField,
     contactFormField(HUBSPOT_ARGENTINA_FORM_ID, false),

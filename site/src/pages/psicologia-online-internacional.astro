@@ -63,9 +63,9 @@ const faq = page?.faq?.items?.length ? page.faq : {
   title: 'Preguntas frecuentes',
   items: [
     { question: '¿Cualquiera puede hacer terapia online?', answer: 'La terapia online es un canal eficaz para la comunicación terapéutica. Como el canal es audiovisual se asemeja muchísimo a las terapias presenciales. La mayoría de los casos pueden ser tratados mediante esta modalidad.' },
-    { question: '¿Qué necesito para poder hacer terapia online?', answer: 'Contenido a confirmar — completá esta respuesta desde el Studio.' },
-    { question: '¿Cuánto tiempo dura la sesión?', answer: 'Contenido a confirmar — completá esta respuesta desde el Studio.' },
-    { question: '¿Cómo se realiza el pago desde el exterior?', answer: 'Contenido a confirmar — completá esta respuesta desde el Studio.' },
+    { question: '¿Qué necesito para poder hacer terapia online?', answer: 'Las sesiones se realizan a través de videollamadas. Para poder tener tu sesión solo tenés que tener un espacio de privacidad, buena conexión a Internet y alguna aplicación de videollamadas (Meet, WhatsApp). Cuando coordines la consulta podrás acordar la aplicación a utilizar.' },
+    { question: '¿Cuánto tiempo dura la sesión?', answer: 'Las sesiones tienen una duración de 50 minutos.' },
+    { question: '¿Cómo se realiza el pago desde el exterior?', answer: 'El pago puede hacerse a través de transferencia bancaria o Mercado Pago. El mismo deberá realizarse previo a cada sesión.' },
   ],
 };
 ---
@@ -73,7 +73,7 @@ const faq = page?.faq?.items?.length ? page.faq : {
   <Header />
   <main>
     <section class="hero" id="inicio">
-      <div class="hero-bg ph"><span>foto · espacio cálido</span></div>
+      <div class="hero-bg"><img src="/assets/crecer-psicologia-hero.webp" alt="" /></div>
       <div class="hero-inner">
         <h1>{hero.headline}</h1>
         <p>{hero.lead}</p>

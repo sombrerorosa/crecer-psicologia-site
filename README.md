@@ -28,9 +28,19 @@ Falta:
 - Agregar `SANITY_PROJECT_ID=98goghrf` y `SANITY_DATASET=production` como variables de entorno en Cloudflare Pages.
 - Agregar el dominio del Studio a los CORS Origins del proyecto (sanity.io/manage → API) una vez deployado.
 
+## Cloudflare Pages
+
+Ya deployado — 2 proyectos, sitio y Studio, conectados al repo. GTM (`GTM-KNQ37RW`) instalado en `Base.astro` (head + noscript en body) en todas las páginas.
+
+## Fotos y logo
+
+Reemplazados todos los placeholders con material real (`site/public/assets/`): `crecer-psicologia-hero.webp` (hero de Home e Internacional), `psicologia-online-hero.webp` (hero propio de esa página), `jovenes.webp` / `adultos.webp` / `pareja.webp` (cards de "a quiénes atendemos"), `nuestro-enfoque.webp`. Logo del header pasado a `crecer-psicologia-logo.svg` (vector, fondo transparente).
+
+## Micro-animaciones
+
+Entrada por scroll (`[data-animate]` + `IntersectionObserver`, ya montado en `Base.astro`) aplicada a: encabezados de sección (fade+up), primera fila de cards en grillas de 3 (izquierda/arriba/derecha), la sección "Nuestro enfoque" (texto desde la izquierda, foto desde la derecha), la cita de Carl Jung, y el bloque de FAQ. El hero no anima porque ya es lo primero que se ve al cargar.
+
 ## Pendientes antes de producción
 
-1. **Fotos reales**: todos los espacios de imagen (hero, cards de "a quiénes atendemos", enfoque) son placeholders rayados, a propósito — reemplazar cuando haya material fotográfico del consultorio.
-2. **Respuestas de FAQ**: 3 de las 4 preguntas frecuentes tienen texto simulado ("Contenido a confirmar…") a pedido — completarlas en `sanity/schemas/sharedFields.ts` (`faqField`) o desde el Studio una vez conectado.
-3. **Cloudflare Pages**: configurar 2 proyectos (sitio y Studio) igual que en `sombrero-rosa-site/SETUP.md` — build command `cd site && npm install && npm run build`, output `site/dist`; Studio con `npx sanity build studio-dist`.
-4. **Dominio**: migrar `crecerpsicologia.com.ar` de WordPress a Cloudflare Pages cuando el sitio esté aprobado (ver sección 8 de `sombrero-rosa-site/SETUP.md` para el procedimiento sin downtime).
+1. **Contenido en Sanity**: las 3 páginas (Home, Online, Internacional) ya estaban publicadas en Sanity con el contenido viejo — los cambios de este commit (FAQ real, sin "Adultos mayores" en Online) están en los defaults del código, pero **hay que repetirlos también en el Studio** para que el sitio (que prioriza Sanity sobre los defaults) los refleje.
+2. **Dominio**: migrar `crecerpsicologia.com.ar` de WordPress a Cloudflare Pages cuando el sitio esté aprobado (ver sección 8 de `sombrero-rosa-site/SETUP.md` para el procedimiento sin downtime) — ahí también se verifica el sitio en Search Console (TXT record en el DNS de Cloudflare).

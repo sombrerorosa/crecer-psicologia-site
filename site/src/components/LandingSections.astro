@@ -13,35 +13,51 @@ interface Props {
   phonePlaceholder?: string;
 }
 const { audiences, specialties, approach, contactForm, howItWorks, faq, phonePlaceholder } = Astro.props;
+
+const AUDIENCE_PHOTOS: Record<string, string> = {
+  'jóvenes adultos': '/assets/jovenes.webp',
+  'adultos': '/assets/adultos.webp',
+  'parejas': '/assets/pareja.webp',
+};
+
+// left/up/right en la primera fila de 3, el resto siempre "up" (mismo patrón que sombrero-rosa-site)
+const animFor = (i: number) => (i % 3 === 0 ? 'left' : i % 3 === 2 ? 'right' : 'up');
 ---
 <section class="section" id="atendemos">
   <div class="section-inner">
-    <div class="section-head">
+    <div class="section-head" data-animate="up">
       <h2 class="section-title">{audiences.title}</h2>
       <p class="section-lead">{audiences.lead}</p>
     </div>
     <div class="grid" style={`grid-template-columns:repeat(${audiences.items.length},1fr);`}>
-      {audiences.items.map((item) => (
-        <div class="card audience-card hover">
-          <div class="card-media ph"><span>foto · {item.title.toLowerCase()}</span></div>
-          <div class="card-body">
-            <h4>{item.title}</h4>
-            <a href="#contacto">Contactanos</a>
+      {audiences.items.map((item, i) => {
+        const photo = AUDIENCE_PHOTOS[item.title.toLowerCase()];
+        return (
+          <div class="card audience-card hover" data-animate={animFor(i)} style={`--anim-delay:${i * 0.1}s`}>
+            {photo ? (
+              <div class="card-media"><img src={photo} alt="" loading="lazy" /></div>
+            ) : (
+              <div class="card-media ph"><span>foto · {item.title.toLowerCase()}</span></div>
+            )}
+            <div class="card-body">
+              <h4>{item.title}</h4>
+              <a href="#contacto">Contactanos</a>
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   </div>
 </section>
 
 <section class="section" id="especialidades" style="background:var(--surface-2);">
   <div class="section-inner">
-    <div class="section-head">
+    <div class="section-head" data-animate="up">
       <h2 class="section-title">{specialties.title}</h2>
     </div>
     <div class="grid grid-3">
-      {specialties.items.map((item) => (
-        <div class="card card-spec">
+      {specialties.items.map((item, i) => (
+        <div class="card card-spec" data-animate={animFor(i)} style={`--anim-delay:${i * 0.1}s`}>
           <div class="card-body">
             <div class="card-icon"><Icon name={item.icon as any} /></div>
             <h4>{item.title}</h4>
@@ -55,18 +71,20 @@ const { audiences, specialties, approach, contactForm, howItWorks, faq, phonePla
 
 <section class="section" id="enfoque">
   <div class="section-inner grid grid-2" style="align-items:center;gap:var(--sp-8);">
-    <div>
+    <div data-animate="left">
       <div class="eyebrow" style="justify-content:flex-start;">{approach.eyebrow}</div>
       <h2 class="section-title">{approach.title}</h2>
       {approach.paragraphs.map((p) => <p style="color:var(--c-ink-soft);margin-bottom:var(--sp-3);">{p}</p>)}
     </div>
-    <div class="ph" style="aspect-ratio:4/5;border-radius:var(--radius-lg);"><span>foto · espacio cálido</span></div>
+    <div data-animate="right">
+      <img src="/assets/nuestro-enfoque.webp" alt="" loading="lazy" style="width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:var(--radius-lg);" />
+    </div>
   </div>
 </section>
 
 <div class="section" style="background:var(--c-forest);padding-top:var(--sp-6);padding-bottom:var(--sp-6);">
   <div class="section-inner">
-    <div class="pullquote" style="border-left-color:var(--c-sand);text-align:center;border-left:none;">
+    <div class="pullquote" data-animate="up" style="border-left-color:var(--c-sand);text-align:center;border-left:none;">
       <p style="color:var(--c-white);">"{approach.quote}"</p>
       <cite style="color:var(--c-green-soft);">{approach.quoteAuthor}</cite>
     </div>
@@ -77,12 +95,12 @@ const { audiences, specialties, approach, contactForm, howItWorks, faq, phonePla
 
 <section class="section">
   <div class="section-inner">
-    <div class="section-head">
+    <div class="section-head" data-animate="up">
       <h2 class="section-title">{howItWorks.title}</h2>
     </div>
     <div class="grid grid-3">
-      {howItWorks.items.map((item) => (
-        <div class="step">
+      {howItWorks.items.map((item, i) => (
+        <div class="step" data-animate={animFor(i)} style={`--anim-delay:${i * 0.1}s`}>
           <div class="step-icon"><Icon name={item.icon as any} /></div>
           <h4>{item.title}</h4>
           <p>{item.desc}</p>
@@ -94,9 +112,11 @@ const { audiences, specialties, approach, contactForm, howItWorks, faq, phonePla
 
 <section class="section" style="background:var(--surface-2);">
   <div class="section-inner" style="max-width:760px;">
-    <div class="section-head" style="margin-bottom:var(--sp-5);">
+    <div class="section-head" style="margin-bottom:var(--sp-5);" data-animate="up">
       <h2 class="section-title">{faq.title}</h2>
     </div>
-    <Accordion items={faq.items} />
+    <div data-animate="up">
+      <Accordion items={faq.items} />
+    </div>
   </div>
 </section>
