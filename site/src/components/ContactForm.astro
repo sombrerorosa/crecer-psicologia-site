@@ -13,7 +13,6 @@ const {
   showCountryField = false,
   phonePlaceholder = '+54 9 11 1234 5678',
 } = Astro.props;
-const HUBSPOT_PORTAL_ID = '21499646';
 const formId = `contact-form-${hubspotFormId.slice(0, 8)}`;
 ---
 <section class="section contact-band" id="contacto">
@@ -22,7 +21,7 @@ const formId = `contact-form-${hubspotFormId.slice(0, 8)}`;
       <h2 class="section-title">{title}</h2>
       <p class="section-lead">{lead}</p>
     </div>
-    <form class="contact-form-grid" id={formId} data-hubspot-form-id={hubspotFormId} data-hubspot-portal-id={HUBSPOT_PORTAL_ID} novalidate>
+    <form class="contact-form-grid" id={formId} data-contact-form novalidate>
       <div class="contact-form-row">
         <div class="field">
           <label>Nombre <span class="req">*</span></label>
@@ -66,45 +65,36 @@ const formId = `contact-form-${hubspotFormId.slice(0, 8)}`;
 </section>
 
 <script>
-  document.querySelectorAll('form[data-hubspot-form-id]').forEach((form) => {
+  document.querySelectorAll('form[data-contact-form]').forEach((form) => {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const el = form as HTMLFormElement;
-      const portalId = el.dataset.hubspotPortalId;
-      const formGuid = el.dataset.hubspotFormId;
       const btn = el.querySelector('button[type="submit"]') as HTMLButtonElement;
 
       const get = (name: string) => (el.elements.namedItem(name) as HTMLInputElement | null)?.value ?? '';
-      const fields = [
-        { name: 'firstname', value: get('name') },
-        { name: 'lastname',  value: get('apellidos') },
-        { name: 'email',     value: get('email') },
-        { name: 'phone',     value: get('phone') },
-        { name: 'country',   value: get('country') },
-        { name: 'message',   value: get('msg') },
-      ].filter((f) => f.value !== '');
+      const payload = {
+        firstname: get('name'),
+        lastname: get('apellidos'),
+        email: get('email'),
+        phone: get('phone'),
+        country: get('country'),
+        message: get('msg'),
+        pageUri: window.location.href,
+        pageName: document.title,
+      };
 
       btn.classList.add('is-loading');
       btn.disabled = true;
 
       try {
-        const res = await fetch(
-          `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formGuid}`,
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              fields,
-              context: { pageUri: window.location.href, pageName: document.title },
-            }),
-          }
-        );
+        const res = await fetch('/api/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
         if (!res.ok) {
-          // HubSpot devuelve el motivo exacto (campo faltante, form GUID
-          // inválido, consentimiento GDPR requerido, etc.) en el body —
-          // lo dejamos en consola para poder diagnosticar de verdad.
           const body = await res.text();
-          console.error('[hubspot] submit failed', res.status, body);
+          console.error('[submit] failed', res.status, body);
           throw new Error(body || `HTTP ${res.status}`);
         }
         // Redirect en vez de reemplazar el form in-place: así se dispara
