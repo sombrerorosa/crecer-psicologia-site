@@ -29,7 +29,7 @@ const animFor = (i: number) => (i % 3 === 0 ? 'left' : i % 3 === 2 ? 'right' : '
       <h2 class="section-title">{audiences.title}</h2>
       <p class="section-lead">{audiences.lead}</p>
     </div>
-    <div class="grid" style={`grid-template-columns:repeat(${audiences.items.length},1fr);`}>
+    <div class={`grid grid-${audiences.items.length}`}>
       {audiences.items.map((item, i) => {
         const photo = AUDIENCE_PHOTOS[item.title.toLowerCase()];
         return (
