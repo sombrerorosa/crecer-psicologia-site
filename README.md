@@ -2,45 +2,60 @@
 
 - `design-system/` — design system vivo (`Design System.html`, tokens, componentes React de referencia). Dirección de producción: **Cálida**. Logo monocromático oficial: versión outline (`logo-mono-black.png` / `logo-mono-white.png`).
 - `site/` — sitio de producción: **Astro** (estático) + **Sanity** (CMS) + **Cloudflare Pages** (hosting), mismo stack que `sombrero-rosa-site`.
+- `functions/` — Cloudflare Pages Functions (API serverless), en la raíz del repo (Root directory del proyecto de Pages quedó vacío/`/`).
 
 ## Páginas migradas desde crecerpsicologia.com.ar
 
 - `/` — Home (one-pager: hero, a quiénes atendemos, especialidades, enfoque, contacto, cómo funciona, FAQ)
-- `/psicologia-online` — mejorada: unificada a la misma dirección visual Cálida (el sitio actual usaba un tratamiento azul marino e íconos distintos, inconsistente con el resto)
-- `/psicologia-online-internacional` — tono alineado: agrega campo País/región, saca el default "Argentina" del teléfono, manda al formulario de HubSpot "Exterior"
-- `/gracias` — mejorada visualmente (antes era texto centrado sin marca)
-- `/politica-de-privacidad` — migrada tal cual (texto genérico, sin cambios de marca)
+- `/psicologia-online` — mejorada: unificada a la misma dirección visual Cálida, 3 audiencias (se sacó "Adultos mayores")
+- `/psicologia-online-internacional` — tono alineado: campo País/región, sin default "Argentina" en el teléfono
+- `/gracias` — mejorada visualmente; es el destino post-envío del formulario (dispara conversión de medios)
+- `/politica-de-privacidad` — migrada tal cual
 
-Por pedido explícito: **no hay sección "Nuestro Equipo"** — el sitio actual no tiene perfiles individuales y se decidió no agregarlos por ahora.
+Por pedido explícito: **no hay sección "Nuestro Equipo"**.
 
-## Formulario de contacto (HubSpot)
+## Formulario de contacto → `functions/api/submit.js`
 
-Portal `21499646`, cuenta propia de Crecer (**distinta** de la de sombrero-rosa-site). Envío directo por fetch a la Forms API pública (no requiere API key / Private App token — a diferencia del enfoque de upsert a CRM que usa `sombrero-rosa-site/functions/api/submit.js`):
-- Home y Psicología Online → form Argentina (`568a344c-97b3-4c3e-aef8-031cd330363a`)
-- Psicología Online Internacional → form Exterior (`369f0579-f050-44d1-b339-0e9bcfdee7a0`)
+El HubSpot de Crecer tiene el CAPTCHA anti-spam activado en sus formularios, y HubSpot **no permite enviar por API a un formulario con CAPTCHA** (`FORM_HAS_RECAPTCHA_ENABLED`). Por eso el form no le pega a la Forms API de HubSpot — el fetch del cliente (`ContactForm.astro`) va a `/api/submit` (esta función), que:
+
+1. **Hace upsert del contacto en HubSpot** vía CRM API (`/crm/v3/objects/contacts/batch/upsert`), autenticado con un **Private App token** guardado en Cloudflare Pages como variable secreta `HUBSPOT_TOKEN`. Usa `email` como `idProperty` (crea o actualiza el contacto existente). La propiedad `message` es custom pero ya existe en esta cuenta de HubSpot.
+2. **Manda un mail de aviso** a `patolramirez@gmail.com` y `slutz1982@gmail.com` vía **Resend** (`RESEND_API_KEY`, otra variable secreta en Cloudflare Pages) — si falla o no está configurada la key, no rompe el submit, solo no llega el aviso (HubSpot ya tiene el dato).
+
+Al terminar OK, el cliente redirige a `/gracias` (para la conversión de Meta/Google Ads).
+
+**Pendiente para que el mail de aviso funcione**: crear cuenta en resend.com, verificar el dominio `crecerpsicologia.com.ar` (agrega unos registros DNS en Cloudflare, análogo a lo que ya hicimos con Sanity/HubSpot), generar un API key y cargarlo en Cloudflare Pages → Settings → Variables and Secrets → `RESEND_API_KEY` (tipo Secret). El `from` que usa el código es `notificaciones@crecerpsicologia.com.ar` — tiene que coincidir con el dominio verificado en Resend.
+
+Los dos form IDs de HubSpot (Argentina `568a344c-...`, Exterior `369f0579-...`) quedaron en el código como referencia pero **ya no se usan para el submit** — todo pasa por el mismo endpoint.
 
 ## Sanity
 
-Proyecto creado: **`98goghrf`**, dataset `production`. Ya está cableado en `site/sanity.config.ts`, `site/sanity.cli.ts` y `site/sanity/sanity.config.ts`, y en `site/.env.example`. Los fetchers (`src/lib/sanity.ts`) atrapan cualquier error de red/config y caen a los defaults hardcodeados de cada página — nunca rompen el build.
+Proyecto: **`98goghrf`**, dataset `production`. Cableado en `site/sanity.config.ts`, `site/sanity.cli.ts`, `site/sanity/sanity.config.ts` y `site/.env.example`. Los fetchers (`src/lib/sanity.ts`) atrapan cualquier error de red/config y caen a los defaults hardcodeados — nunca rompen el build.
 
-Falta:
-- Correr el Studio (`npx sanity dev` dentro de `site/`, o deployarlo a Cloudflare Pages) y crear los documentos singleton (`siteSettings`, `homePage`, `onlinePage`, `internationalPage`) — los `initialValue` de cada campo ya traen precargado el contenido real migrado, así que es solo abrir cada uno y publicarlo.
-- Agregar `SANITY_PROJECT_ID=98goghrf` y `SANITY_DATASET=production` como variables de entorno en Cloudflare Pages.
-- Agregar el dominio del Studio a los CORS Origins del proyecto (sanity.io/manage → API) una vez deployado.
+Pendiente: las 3 páginas ya estaban publicadas en el Studio con contenido viejo (FAQ con placeholders, 4 audiencias en Online) — como Sanity tiene prioridad sobre los defaults del código, **hay que repetir ahí** los cambios de FAQ y sacar "Adultos mayores" (texto exacto ya se le pasó al cliente por chat).
 
 ## Cloudflare Pages
 
-Ya deployado — 2 proyectos, sitio y Studio, conectados al repo. GTM (`GTM-KNQ37RW`) instalado en `Base.astro` (head + noscript en body) en todas las páginas.
+2 proyectos deployados: sitio y Studio, ambos con Root directory vacío (`/`) y build command `cd site && npm install && npm run build` (Studio: `cd site && npm ci && npx sanity build studio-dist`).
+
+**Migración de dominio — en curso**: `crecerpsicologia.com.ar` y `www.crecerpsicologia.com.ar` ya están agregados como Custom domains en el proyecto del sitio. Nameservers ya delegados a Cloudflare desde NIC.ar, DNS revisado (los subdominios de cPanel/mail se dejaron en "DNS only" para no romper webmail/FTP/email — ver historial de chat para el detalle). Falta:
+- Confirmar que terminó de propagar y el dominio quedó "Active" con SSL emitido.
+- Elegir cuál de los dos (`crecerpsicologia.com.ar` o `www`) es el dominio primario en Cloudflare Pages, y actualizar `site: '...'` en `site/astro.config.mjs` para que coincida (hoy dice `https://www.crecerpsicologia.com.ar`).
+- Verificar el sitio en Search Console (TXT record en el DNS de Cloudflare) una vez el dominio esté activo.
+
+El email (`consultas@crecerpsicologia.com.ar`) se queda en el hosting cPanel actual — no migra a ningún lado. Si en el futuro dan de baja ese hosting, la idea acordada es Cloudflare Email Routing (gratis) reenviando a Gmail + "Enviar como" en Gmail, en vez de Google Workspace.
 
 ## Fotos y logo
 
-Reemplazados todos los placeholders con material real (`site/public/assets/`): `crecer-psicologia-hero.webp` (hero de Home e Internacional), `psicologia-online-hero.webp` (hero propio de esa página), `jovenes.webp` / `adultos.webp` / `pareja.webp` (cards de "a quiénes atendemos"), `nuestro-enfoque.webp`. Logo del header pasado a `crecer-psicologia-logo.svg` (vector, fondo transparente).
+Todo en `site/public/assets/`: `crecer-psicologia-hero.webp` (hero Home/Internacional), `psicologia-online-hero.webp` (hero propio), `jovenes.webp` / `adultos.webp` / `pareja.webp` (cards de audiencia), `nuestro-enfoque.webp`, `crecer-psicologia-logo.svg` (logo del header, vector transparente).
 
 ## Micro-animaciones
 
-Entrada por scroll (`[data-animate]` + `IntersectionObserver`, ya montado en `Base.astro`) aplicada a: encabezados de sección (fade+up), primera fila de cards en grillas de 3 (izquierda/arriba/derecha), la sección "Nuestro enfoque" (texto desde la izquierda, foto desde la derecha), la cita de Carl Jung, y el bloque de FAQ. El hero no anima porque ya es lo primero que se ve al cargar.
+Entrada por scroll (`[data-animate]` + `IntersectionObserver`, montado en `Base.astro`) en: encabezados de sección, primera fila de cards (izquierda/arriba/derecha), "Nuestro enfoque" (texto/foto desde lados opuestos), cita de Carl Jung, bloque de FAQ. El hero no anima (ya visible al cargar).
 
-## Pendientes antes de producción
+## Pendientes
 
-1. **Contenido en Sanity**: las 3 páginas (Home, Online, Internacional) ya estaban publicadas en Sanity con el contenido viejo — los cambios de este commit (FAQ real, sin "Adultos mayores" en Online) están en los defaults del código, pero **hay que repetirlos también en el Studio** para que el sitio (que prioriza Sanity sobre los defaults) los refleje.
-2. **Dominio**: migrar `crecerpsicologia.com.ar` de WordPress a Cloudflare Pages cuando el sitio esté aprobado (ver sección 8 de `sombrero-rosa-site/SETUP.md` para el procedimiento sin downtime) — ahí también se verifica el sitio en Search Console (TXT record en el DNS de Cloudflare).
+1. **Sanity**: repetir en el Studio los cambios de FAQ / audiencias que están en el código (ver sección Sanity arriba).
+2. **Resend**: crear cuenta, verificar dominio, cargar `RESEND_API_KEY` en Cloudflare (ver sección del formulario arriba) para que el aviso por mail funcione.
+3. **Dominio primario**: definir apex vs `www` y actualizar `astro.config.mjs`.
+4. **Search Console**: TXT record una vez el dominio esté activo en Cloudflare.
+5. **WhatsApp de notificación**: descartado por ahora (requiere alta en Meta Business + aprobación de plantilla); si lo quieren más adelante, retomar.
