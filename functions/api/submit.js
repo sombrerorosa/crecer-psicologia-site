@@ -102,6 +102,8 @@ export async function onRequestPost({ request, env }) {
     } catch (err) {
       console.error('[submit] notification email failed', err);
     }
+  } else {
+    console.warn('[submit] RESEND_API_KEY not set — skipping notification email');
   }
 
   return new Response(JSON.stringify({ ok: true }), { status: 200, headers: CORS });
