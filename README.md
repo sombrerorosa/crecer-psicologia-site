@@ -44,9 +44,13 @@ Pendiente: las 3 páginas ya estaban publicadas en el Studio con contenido viejo
 
 El email (`consultas@crecerpsicologia.com.ar`) se queda en el hosting cPanel actual — no migra a ningún lado. Si en el futuro dan de baja ese hosting, la idea acordada es Cloudflare Email Routing (gratis) reenviando a Gmail + "Enviar como" en Gmail, en vez de Google Workspace.
 
+## Identidad 2026
+
+Paleta crema/slate/mauve/blush y tipografías **Fraunces** (títulos, citas, marca; pesos livianos) + **Work Sans** (texto, nav, botones, formularios), según el design system en claude.ai. Tokens en `site/src/styles/tokens.css`; los nombres heredados (`--c-forest`, `--c-green`, `--c-sand`, `--c-ink`...) quedan como alias de los nuevos colores.
+
 ## Fotos y logo
 
-Todo en `site/public/assets/`: `crecer-psicologia-hero.webp` (hero Home/Internacional), `psicologia-online-hero.webp` (hero propio), `jovenes.webp` / `adultos.webp` / `pareja.webp` (cards de audiencia), `nuestro-enfoque.webp`, `crecer-psicologia-logo.svg` (logo del header, vector transparente).
+Todo en `site/public/assets/`: `crecer-psicologia-hero.webp` (hero Home/Internacional), `psicologia-online-hero.webp` (hero propio), `jovenes.webp` / `adultos.webp` / `pareja.webp` (cards de audiencia), `nuestro-enfoque.webp`, `crecer-simbolo.svg` (símbolo 2026 del design system: header y favicon; no recolorear ni usar sobre slate). `crecer-psicologia-logo.svg` / `logo-crecer.png` quedan como archivo de la identidad verde anterior.
 
 ## Micro-animaciones
 

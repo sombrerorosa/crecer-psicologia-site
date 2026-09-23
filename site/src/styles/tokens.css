@@ -7,16 +7,23 @@
    ============================================================ */
 
 :root {
-  /* ---- Marca: color base ---- */
-  --c-forest:      #3B5C45; /* Verde bosque — primario */
-  --c-green:       #4E7A5E; /* Verde medio — secundario / hover */
-  --c-green-soft:  #C2D9C9; /* Verde suave — superficies, separadores */
-  --c-cream:       #F2EAD8; /* Crema cálido — fondo base */
-  --c-sand:        #C4A882; /* Arena cálido — detalle, acento */
-  --c-ink:         #3D3530; /* Marrón oscuro — títulos / cuerpo */
-  --c-ink-soft:    #6B5E55; /* Marrón medio — secundario */
-  --c-muted:       #B5A99E; /* Beige claro — terciario / deshabilitado */
-  --c-white:       #FAF6EE; /* Blanco cálido — superficie clara */
+  /* ---- Marca: paleta 2026 ---- */
+  --c-cream:       #F6F1EE; /* Crema — fondo base */
+  --c-slate:       #142531; /* Slate — texto principal y bloques profundos */
+  --c-mauve:       #A47678; /* Mauve — acento decorativo (no para texto chico) */
+  --c-mauve-strong:#906062; /* Mauve de CTA — botones primarios, badges */
+  --c-mauve-deep:  #7F5456; /* Hover de CTA, texto mauve sobre blush */
+  --c-blush:       #E4D7D0; /* Blush — superficies suaves, detalles sobre slate */
+  --c-ink-soft:    #4A5A66; /* Texto secundario */
+  --c-muted:       #8C979F; /* Placeholders / deshabilitado */
+  --c-white:       #FDFBFA; /* Blanco cálido — superficie clara */
+
+  /* Alias heredados (se mantienen para no romper componentes) */
+  --c-forest:      var(--c-mauve-strong);
+  --c-green:       var(--c-mauve-deep);
+  --c-green-soft:  var(--c-blush);
+  --c-sand:        var(--c-mauve);
+  --c-ink:         var(--c-slate);
 
   /* Estados semánticos */
   --c-success:     #4E7A5E;
@@ -27,14 +34,14 @@
   --c-info-bg:     #E6EAEC;
 
   /* Líneas y velos */
-  --line:          rgba(61, 53, 48, 0.12);
-  --line-strong:   rgba(61, 53, 48, 0.22);
-  --veil:          rgba(61, 53, 48, 0.04);
+  --line:          rgba(20, 37, 49, 0.12);
+  --line-strong:   rgba(20, 37, 49, 0.22);
+  --veil:          rgba(20, 37, 49, 0.04);
 
   /* ---- Tipografía ---- */
-  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
-  --font-sans:    'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-mono:    'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-sans:    'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono:    ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
   /* ---- Escala de espaciado (4pt) ---- */
   --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
@@ -49,16 +56,16 @@
   --scale: 1.04;
   --bg:        var(--c-cream);
   --surface:   var(--c-white);
-  --surface-2: #EFE5D0;
+  --surface-2: var(--c-blush);
   --radius-sm: 12px;
   --radius:    18px;
   --radius-lg: 26px;
   --radius-pill: 999px;
-  --shadow-sm: 0 2px 6px rgba(61,53,48,0.06);
-  --shadow:    0 10px 30px rgba(61,53,48,0.10);
-  --shadow-lg: 0 24px 60px rgba(61,53,48,0.16);
-  --heading-weight: 600;
-  --heading-tracking: -0.005em;
+  --shadow-sm: 0 2px 6px rgba(20,37,49,0.06);
+  --shadow:    0 10px 30px rgba(20,37,49,0.10);
+  --shadow-lg: 0 24px 60px rgba(20,37,49,0.16);
+  --heading-weight: 300;
+  --heading-tracking: -0.01em;
   --body-size: 17px;
   --section-pad: var(--sp-8);
   --deco: 1;

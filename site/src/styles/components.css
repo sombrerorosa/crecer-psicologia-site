@@ -6,8 +6,8 @@
 
 /* ===================== BOTONES ===================== */
 .btn {
-  font-family: var(--font-sans); font-weight: 700;
-  font-size: 13.5px; letter-spacing: 0.06em; text-transform: uppercase;
+  font-family: var(--font-sans); font-weight: 500;
+  font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase;
   display: inline-flex; align-items: center; justify-content: center; gap: 9px;
   padding: 13px 26px; border-radius: var(--radius);
   border: 1px solid transparent; cursor: pointer;
@@ -24,8 +24,8 @@
 .btn-primary:hover { background: var(--c-green); }
 .btn-secondary { background: transparent; color: var(--c-forest); border-color: var(--c-forest); }
 .btn-secondary:hover { background: var(--c-forest); color: var(--c-white); }
-.btn-sand { background: var(--c-sand); color: var(--c-ink); }
-.btn-sand:hover { background: color-mix(in srgb, var(--c-sand) 78%, var(--c-ink)); color: var(--c-white); }
+.btn-sand { background: var(--c-blush); color: var(--c-ink); }
+.btn-sand:hover { background: color-mix(in srgb, var(--c-blush) 80%, var(--c-mauve)); color: var(--c-ink); }
 .btn[disabled] { opacity: 0.42; cursor: not-allowed; pointer-events: none; }
 .btn.is-loading { color: transparent !important; position: relative; pointer-events: none; }
 .btn.is-loading::after {
@@ -37,7 +37,7 @@
 
 /* ===================== FORMULARIOS ===================== */
 .field { display: flex; flex-direction: column; gap: 7px; margin-bottom: var(--sp-4); }
-.field label { font-size: 13px; font-weight: 700; color: var(--c-ink); letter-spacing: 0.01em; }
+.field label { font-size: 13px; font-weight: 500; color: var(--c-ink); letter-spacing: 0.01em; }
 .field .req { color: var(--c-error); }
 .input, .textarea, .select {
   font-family: var(--font-sans); font-size: 15px; color: var(--c-ink);
@@ -49,7 +49,7 @@
 .input:hover, .textarea:hover, .select:hover { border-color: var(--c-green); }
 .input:focus, .textarea:focus, .select:focus { outline: none; border-color: var(--c-forest); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-forest) 16%, transparent); }
 .textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
-.select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%236B5E55' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px; }
+.select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234A5A66' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px; }
 .field.is-error .input, .field.is-error .textarea { border-color: var(--c-error); background: color-mix(in srgb, var(--c-error-bg) 50%, var(--surface)); }
 .field-msg { font-size: 12.5px; display: none; align-items: center; gap: 6px; margin-top: 1px; }
 .field.is-error .field-msg.err { display: flex; color: var(--c-error); }
@@ -68,14 +68,14 @@
 .card-spec .card-body { gap: var(--sp-3); padding: var(--sp-6); text-align: center; align-items: center; }
 
 /* ===================== CITA ===================== */
-.pullquote { border-left: 3px solid var(--c-sand); padding: var(--sp-2) 0 var(--sp-2) var(--sp-5); }
-.pullquote p { font-family: var(--font-display); font-style: italic; font-size: var(--t-h3); line-height: 1.4; color: var(--c-forest); }
-.pullquote cite { display: block; font-family: var(--font-sans); font-style: normal; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-ink-soft); margin-top: var(--sp-3); }
+.pullquote { border-left: 3px solid var(--c-mauve); padding: var(--sp-2) 0 var(--sp-2) var(--sp-5); }
+.pullquote p { font-family: var(--font-display); font-style: italic; font-weight: 300; font-size: 1.75rem; line-height: 1.4; color: var(--c-forest); }
+.pullquote cite { display: block; font-family: var(--font-sans); font-style: normal; font-weight: 500; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-ink-soft); margin-top: var(--sp-3); }
 
 /* ===================== ACORDEÓN ===================== */
 .accordion { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; }
 .acc-item + .acc-item { border-top: 1px solid var(--line); }
-.acc-head { width: 100%; text-align: left; background: transparent; border: none; cursor: pointer; padding: var(--sp-4) var(--sp-5); display: flex; align-items: center; justify-content: space-between; gap: var(--sp-4); font-family: var(--font-display); font-size: var(--t-h4); font-weight: 600; color: var(--c-ink); transition: color var(--t-fast); }
+.acc-head { width: 100%; text-align: left; background: transparent; border: none; cursor: pointer; padding: var(--sp-4) var(--sp-5); display: flex; align-items: center; justify-content: space-between; gap: var(--sp-4); font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; color: var(--c-ink); transition: color var(--t-fast); }
 .acc-head:hover { color: var(--c-forest); }
 .acc-icon { width: 26px; height: 26px; flex-shrink: 0; border-radius: 50%; border: 1px solid var(--line-strong); display: grid; place-items: center; transition: transform var(--t), background var(--t), border-color var(--t); }
 .acc-icon svg { width: 14px; height: 14px; color: var(--c-ink-soft); }
@@ -87,18 +87,18 @@
 /* ===================== NAV / HEADER / FOOTER ===================== */
 .site-header { position: sticky; top: 0; z-index: 50; background: var(--bg); border-bottom: 1px solid var(--line); padding: 0 var(--sp-6); display: flex; align-items: center; justify-content: space-between; height: 76px; }
 .site-header .brand { display: flex; align-items: center; gap: 12px; }
-.site-header .brand img { width: 38px; height: 38px; object-fit: contain; }
-.site-header .brand .nm { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; color: var(--c-forest); }
+.site-header .brand img { width: 48px; height: 41px; object-fit: contain; }
+.site-header .brand .nm { font-family: var(--font-display); font-size: 1.2rem; font-weight: 400; color: var(--c-ink); }
 .site-nav { display: flex; align-items: center; gap: var(--sp-5); }
-.site-nav a { font-size: 14px; font-weight: 700; color: var(--c-ink-soft); letter-spacing: 0.02em; position: relative; padding: 6px 0; transition: color var(--t-fast); }
+.site-nav a { font-size: 12.5px; font-weight: 500; color: var(--c-ink-soft); letter-spacing: 0.14em; text-transform: uppercase; position: relative; padding: 6px 0; transition: color var(--t-fast); }
 .site-nav a:hover, .site-nav a.active { color: var(--c-forest); }
-.site-nav a.active::after { content: ""; position: absolute; bottom: -2px; left: 0; right: 0; height: 2px; background: var(--c-sand); border-radius: 2px; }
+.site-nav a.active::after { content: ""; position: absolute; bottom: -2px; left: 0; right: 0; height: 2px; background: var(--c-mauve); border-radius: 2px; }
 .hamburger { display: none; width: 42px; height: 42px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); cursor: pointer; align-items: center; justify-content: center; flex-direction: column; gap: 4px; }
 .hamburger span { width: 18px; height: 2px; background: var(--c-ink); border-radius: 2px; }
 
-.site-footer { background: var(--c-forest); color: var(--c-green-soft); padding: var(--sp-6) var(--sp-6); }
+.site-footer { background: var(--c-slate); color: var(--c-green-soft); padding: var(--sp-6) var(--sp-6); }
 .site-footer .ft-inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--sp-4); }
-.site-footer .nm { font-family: var(--font-display); color: var(--c-white); font-size: 1.15rem; }
+.site-footer .nm { font-family: var(--font-display); font-weight: 400; color: var(--c-white); font-size: 1.2rem; }
 .site-footer .ft-nav { display: flex; gap: var(--sp-5); flex-wrap: wrap; }
 .site-footer .ft-nav a { color: var(--c-green-soft); font-size: 14px; transition: color var(--t-fast); }
 .site-footer .ft-nav a:hover { color: var(--c-white); }
@@ -114,7 +114,7 @@
 .ph {
   position: relative; overflow: hidden;
   background-color: var(--surface-2);
-  background-image: repeating-linear-gradient(135deg, transparent 0 11px, color-mix(in srgb, var(--c-sand) 22%, transparent) 11px 12px);
+  background-image: repeating-linear-gradient(135deg, transparent 0 11px, color-mix(in srgb, var(--c-mauve) 22%, transparent) 11px 12px);
   border: 1px dashed var(--line-strong);
   display: flex; align-items: center; justify-content: center;
   color: var(--c-ink-soft);
