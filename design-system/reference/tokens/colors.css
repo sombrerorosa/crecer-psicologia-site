@@ -1,0 +1,27 @@
+/* CRECER PSICOLOGÍA — Color tokens (paleta 2026: crema, slate, mauve, blush).
+   Nombres heredados (c-forest, c-green, c-green-soft, c-sand, c-ink) quedan como alias. */
+:root {
+  --c-slate: #142531; /* Texto principal de marca (títulos y cuerpo) y bloques profundos: footer, banda destacada, card de testimonio. 14:1 sobre crema. */
+  --c-mauve: #a47678; /* Acento de marca en su tono original, solo decorativo sobre fondos claros: borde de citas, subrayado del menú activo, detalles. 3,4:1 sobre crema: no usar para texto chico ni como fondo de botón. */
+  --c-mauve-strong: #906062; /* Mauve de CTA (15% más oscuro que el acento): fondo de botones primarios, badges, controles activos. Texto blanco encima 5,2:1; como texto sobre crema 4,6:1. */
+  --c-mauve-deep: #7f5456; /* Hover de CTA y texto mauve sobre blush (4,5:1): botón y badge soft, íconos de card, rol en card de equipo. */
+  --c-blush: #e4d7d0; /* Color secundario: superficies suaves, fondos de botón/badge soft, textos suaves y comillas sobre slate (11:1). Casi invisible sobre crema (1,25:1): no usar como línea o detalle sobre fondos claros. */
+  --c-forest: var(--c-mauve-strong); /* Nombre heredado: hoy es el mauve de CTA. Botones primarios, badges, checkbox/toggle activos, acordeón abierto, links activos. */
+  --c-green: var(--c-mauve-deep); /* Nombre heredado: hover de CTA y texto mauve sobre blush. */
+  --c-green-soft: var(--c-blush); /* Nombre heredado: superficies suaves (botón y badge soft, íconos de card) y textos suaves sobre slate. */
+  --c-cream: #f6f1ee; /* Fondo base de la marca (crema). */
+  --c-sand: var(--c-mauve); /* Nombre heredado: detalles decorativos sobre fondos claros (antes arena). */
+  --c-ink: var(--c-slate); /* Nombre heredado: texto principal, labels, títulos. 14:1 sobre crema. */
+  --c-ink-soft: #4a5a66; /* Texto secundario: cuerpo de cards, navegación, citas. 6,4:1 sobre crema, 5,1:1 sobre blush. */
+  --c-muted: #8c979f; /* Terciario/deshabilitado: placeholders, track de toggle apagado, metadatos. 2,7:1 sobre crema: no alcanza para texto esencial. */
+  --c-white: #fdfbfa; /* Blanco cálido: superficies claras y texto sobre mauve fuerte o slate. */
+  --c-success: #4e7a5e; /* Estado de éxito (confirmaciones, validación). Siempre con texto o ícono. */
+  --c-success-bg: #e4efe7; /* Fondo de badges y avisos de éxito. */
+  --c-error: #a6513e; /* Estado de error y campos obligatorios. Siempre con texto o ícono. */
+  --c-error-bg: #f3e2db; /* Fondo de badges y avisos de error. */
+  --c-info: #6e7e8c; /* Notas informativas. */
+  --c-info-bg: #e6eaec; /* Fondo de notas informativas. */
+  --line: rgba(20, 37, 49, 0.12); /* Hairlines: bordes de cards, divisores. */
+  --line-strong: rgba(20, 37, 49, 0.22); /* Bordes de inputs y badges outline. */
+  --veil: rgba(20, 37, 49, 0.04); /* Hover sutil (botón ghost). */
+}

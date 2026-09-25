@@ -63,7 +63,7 @@
 .card-body { padding: var(--sp-5); display: flex; flex-direction: column; gap: var(--sp-3); flex: 1; }
 .card-body h4 { font-size: var(--t-h3); }
 .card-body p { font-size: 14.5px; color: var(--c-ink-soft); line-height: 1.65; }
-.card-icon { width: 52px; height: 52px; border-radius: var(--radius); background: var(--c-green-soft); color: var(--c-forest); display: grid; place-items: center; margin-bottom: var(--sp-1); }
+.card-icon { width: 52px; height: 52px; border-radius: var(--radius); background: var(--c-blush); color: var(--c-mauve-deep); display: grid; place-items: center; margin-bottom: var(--sp-1); }
 .card-icon svg { width: 26px; height: 26px; }
 .card-spec .card-body { gap: var(--sp-3); padding: var(--sp-6); text-align: center; align-items: center; }
 
@@ -75,7 +75,7 @@
 /* ===================== ACORDEÓN ===================== */
 .accordion { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; }
 .acc-item + .acc-item { border-top: 1px solid var(--line); }
-.acc-head { width: 100%; text-align: left; background: transparent; border: none; cursor: pointer; padding: var(--sp-4) var(--sp-5); display: flex; align-items: center; justify-content: space-between; gap: var(--sp-4); font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; color: var(--c-ink); transition: color var(--t-fast); }
+.acc-head { width: 100%; text-align: left; background: transparent; border: none; cursor: pointer; padding: var(--sp-4) var(--sp-5); display: flex; align-items: center; justify-content: space-between; gap: var(--sp-4); font-family: var(--font-display); font-size: 1.05rem; font-weight: 400; color: var(--c-ink); transition: color var(--t-fast); }
 .acc-head:hover { color: var(--c-forest); }
 .acc-icon { width: 26px; height: 26px; flex-shrink: 0; border-radius: 50%; border: 1px solid var(--line-strong); display: grid; place-items: center; transition: transform var(--t), background var(--t), border-color var(--t); }
 .acc-icon svg { width: 14px; height: 14px; color: var(--c-ink-soft); }
@@ -85,10 +85,10 @@
 .acc-panel-inner { padding: 0 var(--sp-5) var(--sp-5); font-size: 15px; color: var(--c-ink-soft); line-height: 1.7; max-width: 64ch; }
 
 /* ===================== NAV / HEADER / FOOTER ===================== */
-.site-header { position: sticky; top: 0; z-index: 50; background: var(--bg); border-bottom: 1px solid var(--line); padding: 0 var(--sp-6); display: flex; align-items: center; justify-content: space-between; height: 76px; }
+.site-header { position: sticky; top: 0; z-index: 50; background: var(--surface); border-bottom: 1px solid var(--line); padding: 0 var(--sp-6); display: flex; align-items: center; justify-content: space-between; height: 72px; }
 .site-header .brand { display: flex; align-items: center; gap: 12px; }
-.site-header .brand img { width: 48px; height: 41px; object-fit: contain; }
-.site-header .brand .nm { font-family: var(--font-display); font-size: 1.2rem; font-weight: 400; color: var(--c-ink); }
+.site-header .brand img { width: 38px; height: 38px; object-fit: contain; }
+.site-header .brand .nm { font-family: var(--font-display); font-size: 1.15rem; font-weight: 400; color: var(--c-ink); }
 .site-nav { display: flex; align-items: center; gap: var(--sp-5); }
 .site-nav a { font-size: 12.5px; font-weight: 500; color: var(--c-ink-soft); letter-spacing: 0.14em; text-transform: uppercase; position: relative; padding: 6px 0; transition: color var(--t-fast); }
 .site-nav a:hover, .site-nav a.active { color: var(--c-forest); }
@@ -96,7 +96,7 @@
 .hamburger { display: none; width: 42px; height: 42px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); cursor: pointer; align-items: center; justify-content: center; flex-direction: column; gap: 4px; }
 .hamburger span { width: 18px; height: 2px; background: var(--c-ink); border-radius: 2px; }
 
-.site-footer { background: var(--c-slate); color: var(--c-green-soft); padding: var(--sp-6) var(--sp-6); }
+.site-footer { background: var(--c-slate); color: var(--c-blush); padding: var(--sp-7) var(--sp-6) var(--sp-5); }
 .site-footer .ft-inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--sp-4); }
 .site-footer .nm { font-family: var(--font-display); font-weight: 400; color: var(--c-white); font-size: 1.2rem; }
 .site-footer .ft-nav { display: flex; gap: var(--sp-5); flex-wrap: wrap; }
@@ -104,7 +104,7 @@
 .site-footer .ft-nav a:hover { color: var(--c-white); }
 .site-footer .ft-bottom { max-width: 1120px; margin: var(--sp-5) auto 0; padding-top: var(--sp-4); border-top: 1px solid rgba(255,255,255,0.14); font-size: 12px; text-align: center; color: color-mix(in srgb, var(--c-green-soft) 75%, transparent); }
 
-@media (max-width: 720px) {
+@media (max-width: 640px) {
   .site-nav { display: none; }
   .hamburger { display: flex; }
   .site-footer .ft-inner { flex-direction: column; align-items: flex-start; }
@@ -127,4 +127,5 @@
 [data-animate].is-visible { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   [data-animate] { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .card.hover:hover, .acc-item.open .acc-icon, .btn:active { transform: none; }
 }

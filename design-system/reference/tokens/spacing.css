@@ -1,0 +1,32 @@
+/* CRECER PSICOLOGÍA — Spacing, surfaces, radius, shadow & motion defaults
+   Overridden per direction in directions.css */
+:root {
+  --bg: var(--c-cream); /* Fondo de página: crema en todas las direcciones. */
+  --surface: #ffffff; /* Superficie de cards, header e inputs. */
+  --surface-2: var(--c-blush); /* Superficie secundaria (blush): bloques de apoyo, hover de celdas. */
+  --shadow-sm: 0 1px 2px rgba(20,37,49,0.06);
+  --shadow: 0 6px 22px rgba(20,37,49,0.08);
+  --shadow-lg: 0 18px 50px rgba(20,37,49,0.12);
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+  --body-size: 16px;
+  --section-pad: 64px;
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --t-fast: 0.16s cubic-bezier(0.22, 0.61, 0.36, 1);
+  --t: 0.28s cubic-bezier(0.22, 0.61, 0.36, 1);
+  --scale: 1;
+  --deco: 1;
+  --heading-weight: 300; /* Peso de H1 y H2 (Fraunces Light) en todas las direcciones; H3/H4 van en Regular. */
+  --heading-tracking: -0.01em; /* Tracking de H1/H2. */
+}

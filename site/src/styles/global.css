@@ -48,7 +48,7 @@ button { font-family: inherit; }
 .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
 .hero-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(20,37,49,0.55), rgba(20,37,49,0.15)); }
 .hero-inner { position: relative; z-index: 1; padding: var(--sp-8) var(--sp-6); max-width: 640px; color: var(--c-white); }
-.hero-inner h1 { color: var(--c-white); font-size: clamp(2.5rem, 7vw, 3.75rem); line-height: 1.08; letter-spacing: -0.02em; }
+.hero-inner h1 { color: var(--c-white); font-size: clamp(2.5rem, 7vw, 3.5rem); line-height: 1.08; letter-spacing: -0.02em; }
 .hero-inner p { margin-top: var(--sp-3); font-size: var(--t-lead); color: var(--c-white); opacity: 0.92; }
 .hero-inner .btn { margin-top: var(--sp-6); }
 

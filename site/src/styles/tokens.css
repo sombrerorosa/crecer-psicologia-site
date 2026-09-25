@@ -1,9 +1,8 @@
 /* ============================================================
    CRECER PSICOLOGÍA — Design Tokens (sitio de producción)
-   Estos valores son los de la dirección "Cálida", fijada como
-   dirección de producción en el design system. Ver design-system/
-   en la raíz del repo para las otras direcciones (Editorial/Minimal)
-   y la referencia viva completa.
+   Estos valores son los de la dirección "Minimal", fijada como
+   dirección de producción en el design system (fuente de verdad:
+   design-system/tokens.minimal.css en la raíz del repo).
    ============================================================ */
 
 :root {
@@ -52,23 +51,24 @@
   --t-fast: 0.16s var(--ease);
   --t: 0.28s var(--ease);
 
-  /* ---- Dirección Cálida (fija en producción) ---- */
-  --scale: 1.04;
+  /* ---- Dirección Minimal (fija en producción) ---- */
+  --scale: 0.94;
   --bg:        var(--c-cream);
-  --surface:   var(--c-white);
-  --surface-2: var(--c-blush);
-  --radius-sm: 12px;
-  --radius:    18px;
-  --radius-lg: 26px;
+  --surface:   #FFFFFF;
+  --surface-2: #FBF8F6;
+  --radius-sm: 5px;
+  --radius:    7px;
+  --radius-lg: 10px;
   --radius-pill: 999px;
-  --shadow-sm: 0 2px 6px rgba(20,37,49,0.06);
-  --shadow:    0 10px 30px rgba(20,37,49,0.10);
-  --shadow-lg: 0 24px 60px rgba(20,37,49,0.16);
+  /* Minimal no usa sombras: la separación se hace con hairlines (--line) */
+  --shadow-sm: none;
+  --shadow:    none;
+  --shadow-lg: none;
   --heading-weight: 300;
-  --heading-tracking: -0.01em;
-  --body-size: 17px;
+  --heading-tracking: -0.015em;
+  --body-size: 15px;
   --section-pad: var(--sp-8);
-  --deco: 1;
+  --deco: 0.55;
 
   /* ---- Escala tipográfica derivada ---- */
   --t-display: calc(3.5rem  * var(--scale));

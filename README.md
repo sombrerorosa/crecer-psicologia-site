@@ -1,13 +1,13 @@
 # Crecer Psicología — sitio + design system
 
-- `design-system/` — design system vivo (`Design System.html`, tokens, componentes React de referencia). Dirección de producción: **Cálida**. Logo monocromático oficial: versión outline (`logo-mono-black.png` / `logo-mono-white.png`).
+- `design-system/` — **fuente de verdad del diseño**: handoff del design system de Crecer, dirección **Minimal** (la de producción). Empezar por `design-system/README.md` (reglas de marca, tokens, componentes) y `design-system/tokens.minimal.css` (tokens resueltos). `reference/` tiene la guía viva y los componentes de referencia (HTML/JSX, no se copian tal cual). Logo vigente: `assets/logo/crecer-simbolo.svg`.
 - `site/` — sitio de producción: **Astro** (estático) + **Sanity** (CMS) + **Cloudflare Pages** (hosting), mismo stack que `sombrero-rosa-site`.
 - `functions/` — Cloudflare Pages Functions (API serverless), en la raíz del repo (Root directory del proyecto de Pages quedó vacío/`/`).
 
 ## Páginas migradas desde crecerpsicologia.com.ar
 
 - `/` — Home (one-pager: hero, a quiénes atendemos, especialidades, enfoque, contacto, cómo funciona, FAQ)
-- `/psicologia-online` — mejorada: unificada a la misma dirección visual Cálida, 3 audiencias (se sacó "Adultos mayores")
+- `/psicologia-online` — mejorada: unificada a la misma dirección visual del resto del sitio, 3 audiencias (se sacó "Adultos mayores")
 - `/psicologia-online-internacional` — tono alineado: campo País/región, sin default "Argentina" en el teléfono
 - `/gracias` — mejorada visualmente; es el destino post-envío del formulario (dispara conversión de medios)
 - `/politica-de-privacidad` — migrada tal cual
@@ -46,7 +46,7 @@ El email (`consultas@crecerpsicologia.com.ar`) se queda en el hosting cPanel act
 
 ## Identidad 2026
 
-Paleta crema/slate/mauve/blush y tipografías **Fraunces** (títulos, citas, marca; pesos livianos) + **Work Sans** (texto, nav, botones, formularios), según el design system en claude.ai. Tokens en `site/src/styles/tokens.css`; los nombres heredados (`--c-forest`, `--c-green`, `--c-sand`, `--c-ink`...) quedan como alias de los nuevos colores.
+Paleta crema/slate/mauve/blush y tipografías **Fraunces** (títulos, citas, marca; pesos livianos) + **Work Sans** (texto, nav, botones, formularios), dirección **Minimal** (radios chicos, sin sombras, header blanco, body 15px), según `design-system/`. Tokens en `site/src/styles/tokens.css`; los nombres heredados (`--c-forest`, `--c-green`, `--c-sand`, `--c-ink`...) quedan como alias de los nuevos colores.
 
 ## Fotos y logo
 
