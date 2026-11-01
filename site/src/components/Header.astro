@@ -24,9 +24,12 @@ const NAV = [
 <style>
   .site-nav.open {
     display: flex; flex-direction: column;
-    position: fixed; inset: 72px 0 0 0;
-    background: var(--bg); padding: var(--sp-5); gap: var(--sp-2);
-    z-index: 200; border-top: 1px solid var(--line);
+    position: fixed; inset: 72px 0 auto 0;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    padding: var(--sp-5); gap: var(--sp-2);
+    z-index: 200; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    box-shadow: var(--shadow);
   }
 </style>
 
