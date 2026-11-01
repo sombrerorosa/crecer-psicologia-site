@@ -1,21 +1,21 @@
 /* CRECER PSICOLOGÍA — Color tokens */
 :root {
-  --c-forest: #3B5C45;
-  --c-green: #4E7A5E;
-  --c-green-soft: #C2D9C9;
-  --c-cream: #F2EAD8;
-  --c-sand: #C4A882;
-  --c-ink: #3D3530;
-  --c-ink-soft: #6B5E55;
-  --c-muted: #B5A99E;
-  --c-white: #FAF6EE;
-  --c-success: #4E7A5E;
-  --c-success-bg: #E4EFE7;
+  --c-forest: #8A5F61;
+  --c-green: #774F51;
+  --c-green-soft: #E9DAD5;
+  --c-cream: #F6F1EE;
+  --c-sand: #CDAEAE;
+  --c-ink: #142531;
+  --c-ink-soft: #354752;
+  --c-muted: #B9A8A5;
+  --c-white: #FFFFFF;
+  --c-success: #6E8B76;
+  --c-success-bg: #E7EDE8;
   --c-error: #A6513E;
   --c-error-bg: #F3E2DB;
   --c-info: #6E7E8C;
   --c-info-bg: #E6EAEC;
-  --line: rgba(61, 53, 48, 0.12);
-  --line-strong: rgba(61, 53, 48, 0.22);
-  --veil: rgba(61, 53, 48, 0.04);
+  --line: rgba(20, 37, 49, 0.12);
+  --line-strong: rgba(20, 37, 49, 0.22);
+  --veil: rgba(20, 37, 49, 0.04);
 }

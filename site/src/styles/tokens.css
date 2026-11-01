@@ -1,39 +1,40 @@
 /* ============================================================
    CRECER PSICOLOGÍA — Design Tokens (sitio de producción)
-   Estos valores son los de la dirección "Cálida", fijada como
-   dirección de producción en el design system. Ver design-system/
-   en la raíz del repo para las otras direcciones (Editorial/Minimal)
-   y la referencia viva completa.
+   Marca v2 (rebrand) — paleta mauve/blush/slate, Cormorant Garamond +
+   DM Sans. Reemplaza la marca v1 (verde/crema, Playfair + Lato).
+   Los NOMBRES de variable se mantuvieron iguales a propósito (solo
+   cambian los valores) para no tener que tocar cada componente.
+   Ver design-system/ en la raíz del repo para la referencia viva.
    ============================================================ */
 
 :root {
   /* ---- Marca: color base ---- */
-  --c-forest:      #3B5C45; /* Verde bosque — primario */
-  --c-green:       #4E7A5E; /* Verde medio — secundario / hover */
-  --c-green-soft:  #C2D9C9; /* Verde suave — superficies, separadores */
-  --c-cream:       #F2EAD8; /* Crema cálido — fondo base */
-  --c-sand:        #C4A882; /* Arena cálido — detalle, acento */
-  --c-ink:         #3D3530; /* Marrón oscuro — títulos / cuerpo */
-  --c-ink-soft:    #6B5E55; /* Marrón medio — secundario */
-  --c-muted:       #B5A99E; /* Beige claro — terciario / deshabilitado */
-  --c-white:       #FAF6EE; /* Blanco cálido — superficie clara */
+  --c-forest:      #8A5F61; /* Mauve oscuro — primario, CTA, enlaces */
+  --c-green:       #774F51; /* Mauve hover — hover del CTA */
+  --c-green-soft:  #E9DAD5; /* Blush — superficies, separadores */
+  --c-cream:       #F6F1EE; /* Crema — fondo base */
+  --c-sand:        #CDAEAE; /* Rosa — decorativo/acento, nunca con texto blanco */
+  --c-ink:         #142531; /* Tinta — texto principal */
+  --c-ink-soft:    #354752; /* Slate — logo, subtítulos, texto secundario */
+  --c-muted:       #B9A8A5; /* Terciario / deshabilitado (derivado de rosa) */
+  --c-white:       #FFFFFF; /* Superficie clara / texto sobre CTA */
 
   /* Estados semánticos */
-  --c-success:     #4E7A5E;
-  --c-success-bg:  #E4EFE7;
+  --c-success:     #6E8B76;
+  --c-success-bg:  #E7EDE8;
   --c-error:       #A6513E;
   --c-error-bg:    #F3E2DB;
   --c-info:        #6E7E8C;
   --c-info-bg:     #E6EAEC;
 
-  /* Líneas y velos */
-  --line:          rgba(61, 53, 48, 0.12);
-  --line-strong:   rgba(61, 53, 48, 0.22);
-  --veil:          rgba(61, 53, 48, 0.04);
+  /* Líneas y velos (derivados de --c-ink: 20,37,49) */
+  --line:          rgba(20, 37, 49, 0.12);
+  --line-strong:   rgba(20, 37, 49, 0.22);
+  --veil:          rgba(20, 37, 49, 0.04);
 
   /* ---- Tipografía ---- */
-  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
-  --font-sans:    'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-sans:    'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono:    'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
   /* ---- Escala de espaciado (4pt) ---- */
@@ -45,20 +46,24 @@
   --t-fast: 0.16s var(--ease);
   --t: 0.28s var(--ease);
 
-  /* ---- Dirección Cálida (fija en producción) ---- */
+  /* ---- Dirección Cálida (fija en producción) ----
+     Radios más contenidos que la marca v1 (12px en vez de 18px en
+     tarjetas, igual que .crecer-tarjeta del kit) y sombras mucho más
+     sutiles — el kit no usa sombras en absoluto, el acento "orgánico"
+     ahora lo dan los blobs decorativos, no la profundidad. */
   --scale: 1.04;
   --bg:        var(--c-cream);
   --surface:   var(--c-white);
-  --surface-2: #EFE5D0;
-  --radius-sm: 12px;
-  --radius:    18px;
-  --radius-lg: 26px;
+  --surface-2: var(--c-green-soft);
+  --radius-sm: 8px;
+  --radius:    12px;
+  --radius-lg: 20px;
   --radius-pill: 999px;
-  --shadow-sm: 0 2px 6px rgba(61,53,48,0.06);
-  --shadow:    0 10px 30px rgba(61,53,48,0.10);
-  --shadow-lg: 0 24px 60px rgba(61,53,48,0.16);
-  --heading-weight: 600;
-  --heading-tracking: -0.005em;
+  --shadow-sm: none;
+  --shadow:    0 1px 3px rgba(20,37,49,0.08);
+  --shadow-lg: 0 8px 24px rgba(20,37,49,0.10);
+  --heading-weight: 400;
+  --heading-tracking: 0em;
   --body-size: 17px;
   --section-pad: var(--sp-8);
   --deco: 1;

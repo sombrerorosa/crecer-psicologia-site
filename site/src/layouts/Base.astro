@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import FloatingActions from '../components/FloatingActions.astro';
+import { getSiteSettings } from '../lib/sanity';
 
 interface Props {
   title?: string;
@@ -11,6 +12,33 @@ const {
   description = 'Psicología clínica para adultos y parejas. Un espacio cálido, de apoyo y respeto que favorezca el cambio para alcanzar tus objetivos.',
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/assets/og-crecer-1200x630.png', Astro.site);
+
+const settings = await getSiteSettings();
+const whatsapp = settings?.whatsapp || 'https://wa.me/5491132950452';
+const telephone = '+' + whatsapp.replace(/\D/g, '');
+const sameAs = [settings?.instagram].filter(Boolean);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalClinic',
+  name: 'Crecer Psicología',
+  url: 'https://www.crecerpsicologia.com.ar',
+  logo: new URL('/assets/crecer-horizontal-positivo.png', Astro.site).toString(),
+  image: ogImage.toString(),
+  description: 'Psicología para adultos, jóvenes adultos y parejas. Un espacio de acompañamiento con enfoque humano y profesional.',
+  slogan: 'Comprender · Acompañar · Transformar',
+  areaServed: { '@type': 'Country', name: 'Argentina' },
+  availableLanguage: 'es',
+  telephone,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Canning',
+    addressRegion: 'Buenos Aires',
+    addressCountry: 'AR',
+  },
+  ...(sameAs.length ? { sameAs } : {}),
+};
 ---
 <!doctype html>
 <html lang="es">
@@ -30,10 +58,15 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:type" content="website" />
-  <link rel="icon" type="image/png" href="/assets/logo-crecer.png" />
+  <meta property="og:image" content={ogImage} />
+  <link rel="icon" href="/assets/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->

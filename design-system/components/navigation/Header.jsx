@@ -1,11 +1,10 @@
 import React from 'react';
 
-export function Header({ logo = '../../assets/logo-crecer.png', name = 'Crecer Psicología', links = [], activeHref }) {
+export function Header({ logo = '../../assets/crecer-horizontal-positivo.svg', name = 'Crecer Psicología', links = [], activeHref }) {
   return (
     <header className="site-header">
       <div className="brand">
         <img src={logo} alt={name} />
-        <div className="nm">{name}</div>
       </div>
       <nav className="site-nav">
         {links.map(l => (

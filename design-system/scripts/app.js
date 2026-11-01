@@ -37,15 +37,15 @@ window.icon = icon;
 
 /* ---------- Paleta ---------- */
 const PALETTE = [
-  { nm: 'Verde bosque', hex: '#3B5C45', role: 'Primario · CTA, marca, íconos', text: '#FAF6EE' },
-  { nm: 'Verde medio',  hex: '#4E7A5E', role: 'Secundario · hover, variantes', text: '#FAF6EE' },
-  { nm: 'Verde suave',  hex: '#C2D9C9', role: 'Superficies, separadores, chips', text: '#3B5C45' },
-  { nm: 'Crema cálido', hex: '#F2EAD8', role: 'Fondo base de marca', text: '#3D3530' },
-  { nm: 'Arena cálido', hex: '#C4A882', role: 'Acento, detalle del logo', text: '#3D3530' },
-  { nm: 'Marrón oscuro',hex: '#3D3530', role: 'Títulos y cuerpo principal', text: '#FAF6EE' },
-  { nm: 'Marrón medio', hex: '#6B5E55', role: 'Texto secundario', text: '#FAF6EE' },
-  { nm: 'Beige claro',  hex: '#B5A99E', role: 'Terciario, estados off', text: '#3D3530' },
-  { nm: 'Blanco cálido',hex: '#FAF6EE', role: 'Superficie clara alternativa', text: '#3D3530' },
+  { nm: 'Mauve oscuro', hex: '#8A5F61', role: 'Primario · CTA, marca, enlaces', text: '#FFFFFF' },
+  { nm: 'Mauve hover',  hex: '#774F51', role: 'Secundario · hover del CTA', text: '#FFFFFF' },
+  { nm: 'Blush',        hex: '#E9DAD5', role: 'Superficies, separadores, chips', text: '#8A5F61' },
+  { nm: 'Crema',        hex: '#F6F1EE', role: 'Fondo base de marca', text: '#142531' },
+  { nm: 'Rosa',         hex: '#CDAEAE', role: 'Decorativo / acento (nunca con texto blanco)', text: '#142531' },
+  { nm: 'Tinta',        hex: '#142531', role: 'Títulos y cuerpo principal', text: '#FFFFFF' },
+  { nm: 'Slate',        hex: '#354752', role: 'Logo, subtítulos, texto secundario', text: '#FFFFFF' },
+  { nm: 'Terciario',    hex: '#B9A8A5', role: 'Terciario, estados off', text: '#142531' },
+  { nm: 'Blanco',       hex: '#FFFFFF', role: 'Superficie clara / texto sobre CTA', text: '#142531' },
 ];
 
 const ICON_SET = ['sprout','leaf','heart','users','user','message','sun','shield','calendar','video','clock','phone','mail','pin','compass','smile','anchor','feather','book','headphones'];

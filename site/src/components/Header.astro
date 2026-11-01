@@ -11,8 +11,7 @@ const NAV = [
 ---
 <header class="site-header">
   <a class="brand" href="/" aria-label="Crecer Psicología, inicio">
-    <img src="/assets/crecer-psicologia-logo.svg" alt="" />
-    <span class="nm">Crecer Psicología</span>
+    <img src="/assets/crecer-horizontal-positivo.svg" alt="Crecer Psicología" />
   </a>
   <nav class="site-nav" id="main-nav" aria-label="Principal">
     {NAV.map((item) => <a href={item.href}>{item.label}</a>)}
@@ -25,7 +24,7 @@ const NAV = [
 <style>
   .site-nav.open {
     display: flex; flex-direction: column;
-    position: fixed; inset: 76px 0 0 0;
+    position: fixed; inset: 72px 0 0 0;
     background: var(--bg); padding: var(--sp-5); gap: var(--sp-2);
     z-index: 200; border-top: 1px solid var(--line);
   }

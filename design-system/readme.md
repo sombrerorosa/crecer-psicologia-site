@@ -1,6 +1,6 @@
 # Crecer Psicología — Design System
 
-Consultorio de psicología en Canning, Buenos Aires. Marca cálida y orgánica construida alrededor de la idea de **crecer**: un isotipo de C en verde bosque que abraza una hoja, sobre una paleta cálida (crema, arena, marrón). Este sistema unifica sitio web, redes y material clínico.
+Consultorio de psicología en Canning, Buenos Aires. Marca v2 (rebrand): un isotipo de dos óvalos orgánicos (blush y rosa) enlazados por un trazo en slate, sobre una paleta mauve/blush con tinta y slate como neutros. Reemplaza la marca v1 (verde bosque, crema/arena/marrón). Este sistema unifica sitio web, redes y material clínico.
 
 Origen: construido directamente en este proyecto (no hay codebase/Figma externo importado). El archivo `Design System.html` (raíz) es la guía viva navegable con 3 direcciones visuales intercambiables — Editorial, Minimal, Cálida —, con **Cálida fijada como dirección de producción**; las otras dos quedan disponibles para comparar tratamiento.
 
@@ -10,7 +10,7 @@ Origen: construido directamente en este proyecto (no hay codebase/Figma externo 
 - `styles/components.css` — clases de componentes (usadas por los .jsx de `components/`).
 - `components/` — primitivas React: `buttons/`, `forms/`, `badges/`, `cards/`, `accordion/`, `quotes/`, `navigation/`.
 - `guidelines/` — specimen cards de fundamentos (Colors, Type, Spacing, Brand).
-- `assets/` — logo principal + 3 variantes monocromáticas + reverse.
+- `assets/` — lockup horizontal positivo/negativo (SVG + PNG), isotipo solo (`icon-512.png`), favicons y OG image. No hay versión monocromática (ver Decisiones confirmadas).
 - `Design System.html` — guía viva original (HTML/CSS/JS, no React) con las 3 direcciones y todos los componentes documentados con más detalle narrativo.
 
 ## Direcciones visuales
@@ -28,10 +28,11 @@ Aplicar con `data-dir="editorial|minimal|calida"` en `<html>` o cualquier conten
 - Frases cortas, afirmativas. Ejemplo real usado en el sistema: "El crecimiento no es lineal, y está bien que así sea."
 
 ## Fundamentos visuales
-- **Color**: verde bosque (#3B5C45) como primario de marca; crema/arena como cálidos dominantes; nunca frío ni azul clínico. Máximo 1-2 colores de fondo por pieza.
-- **Tipografía**: Playfair Display (serif, títulos/display, incluye itálica para citas) + Lato (sans, cuerpo/UI) + IBM Plex Mono (datos, hex, código).
+- **Color**: mauve oscuro (#8A5F61) como primario de marca; crema/blush como cálidos dominantes; rosa como acento decorativo (nunca con texto blanco encima); nunca frío ni azul clínico. Máximo 1-2 colores de fondo por pieza.
+- **Tipografía**: Cormorant Garamond (serif, títulos/display, incluye itálica para citas) + DM Sans (sans, cuerpo/UI) + IBM Plex Mono (datos, hex, código).
 - **Espaciado**: escala 4pt (`--sp-1` a `--sp-9`).
-- **Bordes/sombras**: varían por dirección — Editorial usa hairlines casi sin sombra; Cálida usa sombras difusas y radios grandes; Minimal casi no usa sombra.
+- **Botones**: siempre forma de píldora (`--radius-pill: 999px`), independiente de la dirección visual activa.
+- **Bordes/sombras**: varían por dirección — Editorial usa hairlines casi sin sombra; Cálida usa sombras muy sutiles (el kit no usa sombras marcadas, el acento "orgánico" lo dan los blobs decorativos `.crecer-forma`); Minimal casi no usa sombra.
 - **Imágenes**: sin fotografía de stock genérica importada aún — cards de equipo/testimonios usan slots de imagen a completar con material real del consultorio.
 - **Iconografía**: set de líneas propio (stroke 1.6–1.8px, sin relleno) dibujado a mano para conceptos de marca (hoja, corazón, escudo); nunca emoji.
 - **Animación**: transiciones suaves 0.16–0.28s con easing propio (`--ease`), sin bounces ni efectos llamativos.
@@ -43,7 +44,8 @@ Namespace global del bundle: `window.CrecerPsicologia` (verificar contra el bund
 
 ## Decisiones confirmadas
 - **Dirección de producción**: Cálida. Editorial y Minimal quedan como alternativas comparables vía el switcher, no se eliminan.
-- **Logo monocromático oficial**: versión outline/filete (`logo-mono-black.png`, `logo-mono-white.png`). La variante tonal/sombra (`logo-mono-black-tint.png`, `logo-mono-white-tint.png`) queda documentada en la sección Logo como exploración descartada — el filete se lee mejor a tamaños chicos (favicon, sellos).
+- **Rebrand (marca v2)**: aplicado tanto a `Design System.html`/`tokens/`/`styles/`/`components/` como al sitio de producción (`../site/`). Los NOMBRES de variable (`--c-forest`, `--c-ink`, etc.) se mantuvieron iguales a propósito — solo cambiaron los valores — para no romper nada que los consuma.
+- **Logo**: la marca provee un lockup horizontal ya armado (isotipo + wordmark) en positivo y negativo — no se recompone a mano combinando isotipo + texto por separado. No hay versión monocromática oficial; para espacios reducidos se usa el isotipo solo (`icon-512.png`), que ya trae su fondo crema.
 
 ## Caveats / pendientes
 - No hay fotografía real todavía; cards de equipo/testimonios muestran placeholders de color.

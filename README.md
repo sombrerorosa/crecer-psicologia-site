@@ -1,6 +1,6 @@
 # Crecer Psicología — sitio + design system
 
-- `design-system/` — design system vivo (`Design System.html`, tokens, componentes React de referencia). Dirección de producción: **Cálida**. Logo monocromático oficial: versión outline (`logo-mono-black.png` / `logo-mono-white.png`).
+- `design-system/` — design system vivo (`Design System.html`, tokens, componentes React de referencia). Dirección de producción: **Cálida**. Marca v2 (rebrand, ver sección abajo): lockup horizontal positivo/negativo, sin versión monocromática.
 - `site/` — sitio de producción: **Astro** (estático) + **Sanity** (CMS) + **Cloudflare Pages** (hosting), mismo stack que `sombrero-rosa-site`.
 - `functions/` — Cloudflare Pages Functions (API serverless), en la raíz del repo (Root directory del proyecto de Pages quedó vacío/`/`).
 
@@ -44,9 +44,21 @@ Pendiente: las 3 páginas ya estaban publicadas en el Studio con contenido viejo
 
 El email (`consultas@crecerpsicologia.com.ar`) se queda en el hosting cPanel actual — no migra a ningún lado. Si en el futuro dan de baja ese hosting, la idea acordada es Cloudflare Email Routing (gratis) reenviando a Gmail + "Enviar como" en Gmail, en vez de Google Workspace.
 
+## Rebrand (marca v2)
+
+Cambio de marca aplicado tanto a `site/` (producción) como a `design-system/`, a partir de un kit (`crecer-kit-web.zip`) con logo nuevo, paleta y fuentes nuevas, favicons, OG image y una plantilla de schema.org.
+
+- **Paleta**: mauve/blush (`#8A5F61` primario, `#E9DAD5` superficie suave) con tinta (`#142531`) y slate (`#354752`) como neutros, rosa (`#CDAEAE`) como acento decorativo (nunca con texto blanco encima). Reemplaza la v1 (verde bosque/crema/arena/marrón). Los **nombres** de variable CSS (`--c-forest`, `--c-ink`, etc.) se mantuvieron iguales a propósito — solo cambiaron los valores — para no tener que tocar cada componente.
+- **Tipografía**: Cormorant Garamond (display/títulos) + DM Sans (cuerpo/UI), reemplazan Playfair Display + Lato.
+- **Logo**: la marca provee un lockup horizontal ya armado (isotipo + wordmark), en `crecer-horizontal-positivo.svg` (fondos claros) y `crecer-horizontal-negativo.svg` (fondos oscuros) — ya no se recompone a mano combinando un ícono cuadrado + texto aparte. Para espacios reducidos (favicon, avatar) se usa el isotipo solo, `icon-512.png` (incluye su propio fondo crema). **No hay versión monocromática** en la marca nueva.
+- **Botones**: ahora siempre con forma de píldora (`--radius-pill: 999px`), independiente de la dirección visual.
+- **Favicons / OG image**: set completo (`favicon.ico`, 16/32px, `apple-touch-icon.png`) y `og-crecer-1200x630.png`, cableados en `site/src/layouts/Base.astro`.
+- **schema.org**: JSON-LD `MedicalClinic` agregado en `Base.astro`. Los campos que venían como `"COMPLETAR"` en la plantilla del kit se completaron con datos que ya teníamos: teléfono = el mismo número de WhatsApp del sitio (`settings.whatsapp` en Sanity, o el default `+5491132950452`), dirección = Canning, Buenos Aires, AR, e Instagram = `settings.instagram` de Sanity si está publicado (si no, se omite `sameAs`).
+- **Archivos viejos eliminados**: `logo-crecer.png`, `logo-crecer-inverted.png`, `crecer-psicologia-logo.svg` (y sus variantes mono) — ya no quedaba ninguna referencia activa.
+
 ## Fotos y logo
 
-Todo en `site/public/assets/`: `crecer-psicologia-hero.webp` (hero Home/Internacional), `psicologia-online-hero.webp` (hero propio), `jovenes.webp` / `adultos.webp` / `pareja.webp` (cards de audiencia), `nuestro-enfoque.webp`, `crecer-psicologia-logo.svg` (logo del header, vector transparente).
+Todo en `site/public/assets/`: `crecer-psicologia-hero.webp` (hero Home/Internacional), `psicologia-online-hero.webp` (hero propio), `jovenes.webp` / `adultos.webp` / `pareja.webp` (cards de audiencia), `nuestro-enfoque.webp`, `crecer-horizontal-positivo.svg` / `crecer-horizontal-negativo.svg` (logo del header/footer, vector).
 
 ## Micro-animaciones
 
