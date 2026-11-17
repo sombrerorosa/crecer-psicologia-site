@@ -14,7 +14,7 @@ export default {
       type: 'object',
       fields: [
         { name: 'headline', title: 'Titular', type: 'string', initialValue: 'Tu bienestar emocional, nuestro compromiso' },
-        { name: 'lead',     title: 'Bajada',  type: 'string', initialValue: 'Psicología online y presencial para adultos y parejas' },
+        { name: 'lead',     title: 'Bajada',  type: 'string', initialValue: 'Psicología online para adultos y parejas' },
         { name: 'ctaText',  title: 'Texto CTA', type: 'string', initialValue: 'Contactanos' },
         { name: 'photo',    title: 'Foto de fondo', type: 'image' },
       ],
