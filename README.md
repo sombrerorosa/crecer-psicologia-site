@@ -18,8 +18,10 @@ Por pedido explícito: **no hay sección "Nuestro Equipo"**.
 
 El HubSpot de Crecer tiene el CAPTCHA anti-spam activado en sus formularios, y HubSpot **no permite enviar por API a un formulario con CAPTCHA** (`FORM_HAS_RECAPTCHA_ENABLED`). Por eso el form no le pega a la Forms API de HubSpot — el fetch del cliente (`ContactForm.astro`) va a `/api/submit` (esta función), que:
 
-1. **Hace upsert del contacto en HubSpot** vía CRM API (`/crm/v3/objects/contacts/batch/upsert`), autenticado con un **Private App token** guardado en Cloudflare Pages como variable secreta `HUBSPOT_TOKEN`. Usa `email` como `idProperty` (crea o actualiza el contacto existente). La propiedad `message` es custom pero ya existe en esta cuenta de HubSpot.
-2. **Manda un mail de aviso** a `patolramirez@gmail.com` y `slutz1982@gmail.com` vía **Resend** (`RESEND_API_KEY`, otra variable secreta en Cloudflare Pages) — si falla o no está configurada la key, no rompe el submit, solo no llega el aviso (HubSpot ya tiene el dato).
+1. **Crea el contacto en HubSpot** vía CRM API (`/crm/v3/objects/contacts`), autenticado con un **Private App token** guardado en Cloudflare Pages como variable secreta `HUBSPOT_TOKEN`. Si el email **ya existe**, no pisa los datos del contacto (nombre, teléfono, país): solo actualiza la propiedad `message` con la consulta nueva. Es a propósito — el endpoint es público, y con un upsert cualquiera que supiera el email de un contacto podía reescribirle la ficha. La propiedad `message` es custom pero ya existe en esta cuenta de HubSpot.
+2. **Manda un mail de aviso** vía **Resend** (`RESEND_API_KEY`, otra variable secreta en Cloudflare Pages) con todos los datos del formulario — si falla o no está configurada la key, no rompe el submit, solo no llega el aviso (HubSpot ya tiene el dato). Los destinatarios salen de la variable `NOTIFY_TO` (emails separados por coma); si no está cargada, usa los que están por defecto en el código.
+
+**Protecciones del endpoint**: solo acepta envíos desde el propio sitio (cabecera `Origin`), valida y recorta cada campo, descarta los envíos que completan el campo trampa oculto (`website`) y no devuelve al visitante el error crudo de HubSpot (queda en los logs de Cloudflare). **No tiene límite de envíos por IP**: eso se configura en Cloudflare (regla de rate limiting sobre `/api/submit`, o Turnstile).
 
 Al terminar OK, el cliente redirige a `/gracias` (para la conversión de Meta/Google Ads).
 

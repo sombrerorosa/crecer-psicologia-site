@@ -59,6 +59,11 @@ const formId = `contact-form-${hubspotFormId.slice(0, 8)}`;
         <label>Mensaje</label>
         <textarea class="textarea" name="msg" placeholder="¿Cuál es el motivo de tu consulta?"></textarea>
       </div>
+      {/* Campo trampa anti-bots: oculto para personas y lectores de pantalla.
+          Si llega completo, /api/submit descarta el envío. */}
+      <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;">
+        <label>Sitio web <input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
+      </div>
       <button class="btn btn-sand lg" type="submit" style="width:100%;">Enviar</button>
     </form>
   </div>
@@ -79,6 +84,7 @@ const formId = `contact-form-${hubspotFormId.slice(0, 8)}`;
         phone: get('phone'),
         country: get('country'),
         message: get('msg'),
+        website: get('website'),
         pageUri: window.location.href,
         pageName: document.title,
       };

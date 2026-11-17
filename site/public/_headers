@@ -1,0 +1,12 @@
+# Cabeceras de seguridad para todas las rutas (Cloudflare Pages).
+# La CSP solo limita lo que no puede romper el sitio: quién puede embeberlo,
+# <base> y plugins. No restringe scripts porque el sitio usa Google Tag
+# Manager y scripts en línea; una CSP de scripts hay que armarla y probarla
+# aparte (empezar con Content-Security-Policy-Report-Only).
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Strict-Transport-Security: max-age=31536000
+  Content-Security-Policy: frame-ancestors 'self'; base-uri 'self'; object-src 'none'
